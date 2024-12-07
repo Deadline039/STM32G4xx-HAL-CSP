@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
  * @version 1.0
- * @date    2024-12-05
+ * @date    2024-12-07
  * @note    Generate Automatically. 
  */
 
