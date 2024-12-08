@@ -2766,6 +2766,29 @@
 #endif  /* FDCAN3_ENABLE */
 // </e>
 
+// <e> RTC (Real Time Clock)
+#define RTC_ENABLE            0
+
+//   <e> RTC Wake Up Interrupt
+#define RTC_WKUP_IT_ENABLE    0
+//      <o> RTC Wake up Interrupt Priority <0-15>
+//      <i> The Interrupt Priority of RTC Wake up
+#define RTC_WKUP_IT_PRIORITY  2
+//      <o> RTC Wake up Interrupt SubPriority <0-15>
+//      <i> The Interrupt SubPriority of RTC Wake up
+#define RTC_WKUP_IT_SUB       3
+//   </e>
+
+//   <e> RTC Alarm Interrupt
+#define RTC_ALARM_IT_ENABLE   0
+//      <o> RTC Alarm  Interrupt Priority <0-15>
+//      <i> The Interrupt Priority of RTC Alarm
+#define RTC_ALARM_IT_PRIORITY 2
+//      <o> RTC Alarm Interrupt SubPriority <0-15>
+//      <i> The Interrupt SubPriority of RTC Alarm
+#define RTC_ALARM_IT_SUB      3
+//   </e>
+
 //------------- <<< end of configuration section >>> -----------------------
 
 #ifdef __cplusplus
@@ -2825,6 +2848,10 @@ extern "C" {
 #if (FDCAN1_ENABLE || FDCAN2_ENABLE || FDCAN3_ENABLE)
 #include "../CAN_STM32G4xx.h"
 #endif  /* (FDCAN1_ENABLE || FDCAN2_ENABLE || FDCAN3_ENABLE) */
+
+#if (RTC_ENABLE)
+#include "../RTC_STM32G4xx.h"
+#endif /* RTC_ENABLE */
 
 #ifdef __cplusplus
 }
