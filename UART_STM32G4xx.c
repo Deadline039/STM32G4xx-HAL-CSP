@@ -5,14 +5,14 @@
  * @brief   Chip Support Package of UART on STM32G4xx
  * @version 1.0
  * @date    2024-12-07
- * @note    Generate Automatically. 
+ * @note    Generate Automatically.
  */
 
 #include "CSP_Config.h"
 
 #include "UART_STM32G4xx.h"
-#include "ring_fifo.h"
 
+#include "./ring_fifo/ring_fifo.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -72,9 +72,9 @@ void uart_dmarx_idle_callback(UART_HandleTypeDef *huart);
 #if LPUART1_ENABLE
 
 UART_HandleTypeDef lpuart1_handle = {.Instance = LPUART1,
-                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                             .StopBits = UART_STOPBITS_1,
-                                             .Parity = UART_PARITY_NONE}};
+                                     .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                              .StopBits = UART_STOPBITS_1,
+                                              .Parity = UART_PARITY_NONE}};
 
 #if LPUART1_RX_DMA
 
@@ -90,7 +90,7 @@ static DMA_HandleTypeDef lpuart1_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(LPUART1_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t lpuart1_rx_fifo = {.buf_size = LPUART1_RX_DMA_BUF_SIZE,
-                                        .fifo_size = LPUART1_RX_DMA_FIFO_SIZE};
+                                         .fifo_size = LPUART1_RX_DMA_FIFO_SIZE};
 
 #endif /* LPUART1_RX_DMA */
 
@@ -231,9 +231,9 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&lpuart1_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&lpuart1_handle);
-    
+
 #if LPUART1_RX_DMA
     __HAL_UART_ENABLE_IT(&lpuart1_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&lpuart1_handle);
@@ -343,7 +343,8 @@ uint8_t lpuart1_deinit(void) {
         CSP_DMA_CHANNEL_IRQn(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL));
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
-    HAL_UART_UnRegisterCallback(&lpuart1_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
+    HAL_UART_UnRegisterCallback(&lpuart1_handle,
+                                HAL_UART_RX_HALFCOMPLETE_CB_ID);
     HAL_UART_UnRegisterCallback(&lpuart1_handle, HAL_UART_RX_COMPLETE_CB_ID);
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
     lpuart1_handle.hdmarx = NULL;
@@ -375,8 +376,7 @@ uint8_t lpuart1_deinit(void) {
 
 /**
  * @}
- */ 
-
+ */
 
 /*****************************************************************************
  * @defgroup USART1 Functions
@@ -545,9 +545,9 @@ uint8_t usart1_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&usart1_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&usart1_handle);
-    
+
 #if USART1_RX_DMA
     __HAL_UART_ENABLE_IT(&usart1_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart1_handle);
@@ -689,8 +689,7 @@ uint8_t usart1_deinit(void) {
 
 /**
  * @}
- */ 
-
+ */
 
 /*****************************************************************************
  * @defgroup USART2 Functions
@@ -859,9 +858,9 @@ uint8_t usart2_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&usart2_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&usart2_handle);
-    
+
 #if USART2_RX_DMA
     __HAL_UART_ENABLE_IT(&usart2_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart2_handle);
@@ -1003,8 +1002,7 @@ uint8_t usart2_deinit(void) {
 
 /**
  * @}
- */ 
-
+ */
 
 /*****************************************************************************
  * @defgroup USART3 Functions
@@ -1173,9 +1171,9 @@ uint8_t usart3_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&usart3_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&usart3_handle);
-    
+
 #if USART3_RX_DMA
     __HAL_UART_ENABLE_IT(&usart3_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart3_handle);
@@ -1317,8 +1315,7 @@ uint8_t usart3_deinit(void) {
 
 /**
  * @}
- */ 
-
+ */
 
 /*****************************************************************************
  * @defgroup UART4 Functions
@@ -1328,9 +1325,9 @@ uint8_t usart3_deinit(void) {
 #if UART4_ENABLE
 
 UART_HandleTypeDef uart4_handle = {.Instance = UART4,
-                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                             .StopBits = UART_STOPBITS_1,
-                                             .Parity = UART_PARITY_NONE}};
+                                   .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                            .StopBits = UART_STOPBITS_1,
+                                            .Parity = UART_PARITY_NONE}};
 
 #if UART4_RX_DMA
 
@@ -1346,7 +1343,7 @@ static DMA_HandleTypeDef uart4_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(UART4_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t uart4_rx_fifo = {.buf_size = UART4_RX_DMA_BUF_SIZE,
-                                        .fifo_size = UART4_RX_DMA_FIFO_SIZE};
+                                       .fifo_size = UART4_RX_DMA_FIFO_SIZE};
 
 #endif /* UART4_RX_DMA */
 
@@ -1487,9 +1484,9 @@ uint8_t uart4_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&uart4_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&uart4_handle);
-    
+
 #if UART4_RX_DMA
     __HAL_UART_ENABLE_IT(&uart4_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&uart4_handle);
@@ -1631,8 +1628,7 @@ uint8_t uart4_deinit(void) {
 
 /**
  * @}
- */ 
-
+ */
 
 /*****************************************************************************
  * @defgroup UART5 Functions
@@ -1642,9 +1638,9 @@ uint8_t uart4_deinit(void) {
 #if UART5_ENABLE
 
 UART_HandleTypeDef uart5_handle = {.Instance = UART5,
-                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                             .StopBits = UART_STOPBITS_1,
-                                             .Parity = UART_PARITY_NONE}};
+                                   .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                            .StopBits = UART_STOPBITS_1,
+                                            .Parity = UART_PARITY_NONE}};
 
 #if UART5_RX_DMA
 
@@ -1660,7 +1656,7 @@ static DMA_HandleTypeDef uart5_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(UART5_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t uart5_rx_fifo = {.buf_size = UART5_RX_DMA_BUF_SIZE,
-                                        .fifo_size = UART5_RX_DMA_FIFO_SIZE};
+                                       .fifo_size = UART5_RX_DMA_FIFO_SIZE};
 
 #endif /* UART5_RX_DMA */
 
@@ -1801,9 +1797,9 @@ uint8_t uart5_init(uint32_t baud_rate) {
     if (HAL_UART_Init(&uart5_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-    
+
     HAL_UARTEx_DisableFifoMode(&uart5_handle);
-    
+
 #if UART5_RX_DMA
     __HAL_UART_ENABLE_IT(&uart5_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&uart5_handle);
@@ -1945,7 +1941,7 @@ uint8_t uart5_deinit(void) {
 
 /**
  * @}
- */ 
+ */
 
 /*****************************************************************************
  * @defgroup Public UART functions.
