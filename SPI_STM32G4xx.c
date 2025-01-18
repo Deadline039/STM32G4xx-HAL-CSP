@@ -8,7 +8,7 @@
  * @note    Generate Automatically. 
  */
 
-#include "CSP_Config.h"
+#include <CSP_Config.h>
 
 #include "SPI_STM32G4xx.h"
 
