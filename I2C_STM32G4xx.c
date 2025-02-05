@@ -65,7 +65,7 @@ static DMA_HandleTypeDef i2c1_dmatx_handle = {
  * @retval - 1: `I2C_INIT_FAIL`:     I2C init failed.
  * @retval - 2: `I2C_INIT_DMA_FAIL`: I2C DMA init failed.
  * @retval - 3: `I2C_INITED`:        I2C is inited.
- * @note You can use STM32CubeMX or the following tool to get the Timing value..
+ * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
 uint8_t i2c1_init(uint32_t timing, uint32_t address,
@@ -285,7 +285,7 @@ static DMA_HandleTypeDef i2c2_dmatx_handle = {
  * @retval - 1: `I2C_INIT_FAIL`:     I2C init failed.
  * @retval - 2: `I2C_INIT_DMA_FAIL`: I2C DMA init failed.
  * @retval - 3: `I2C_INITED`:        I2C is inited.
- * @note You can use STM32CubeMX or the following tool to get the Timing value..
+ * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
 uint8_t i2c2_init(uint32_t timing, uint32_t address,
@@ -505,7 +505,7 @@ static DMA_HandleTypeDef i2c3_dmatx_handle = {
  * @retval - 1: `I2C_INIT_FAIL`:     I2C init failed.
  * @retval - 2: `I2C_INIT_DMA_FAIL`: I2C DMA init failed.
  * @retval - 3: `I2C_INITED`:        I2C is inited.
- * @note You can use STM32CubeMX or the following tool to get the Timing value..
+ * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
 uint8_t i2c3_init(uint32_t timing, uint32_t address,
@@ -725,7 +725,7 @@ static DMA_HandleTypeDef i2c4_dmatx_handle = {
  * @retval - 1: `I2C_INIT_FAIL`:     I2C init failed.
  * @retval - 2: `I2C_INIT_DMA_FAIL`: I2C DMA init failed.
  * @retval - 3: `I2C_INITED`:        I2C is inited.
- * @note You can use STM32CubeMX or the following tool to get the Timing value..
+ * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
 uint8_t i2c4_init(uint32_t timing, uint32_t address,

@@ -880,7 +880,7 @@ uint8_t fdcan_send_message(can_selected_t can_selected, uint32_t can_ide,
 }
 
 /**
- * @brief FDCAN Send Remote message..
+ * @brief FDCAN Send Remote message.
  *
  * @param can_selected Specific which CAN to send message.
  * @param can_ide Specific standard ID or Extend ID.
