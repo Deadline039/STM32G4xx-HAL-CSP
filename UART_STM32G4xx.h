@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
+ * @date    2025-02-05
  * @note    Generate Automatically.
  */
 
@@ -103,11 +103,15 @@ uint8_t lpuart1_init(uint32_t baud_rate);
 uint8_t lpuart1_deinit(void); 
 
 #  if LPUART1_RX_DMA
+#    define LPUART1_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL)
 #    define LPUART1_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL)
 #  endif /* LPUART1_RX_DMA */
 
 #  if LPUART1_TX_DMA
+#    define LPUART1_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(LPUART1_TX_DMA_NUMBER, LPUART1_TX_DMA_CHANNEL)
 #    define LPUART1_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(LPUART1_TX_DMA_NUMBER, LPUART1_TX_DMA_CHANNEL)
 #  endif /* LPUART1_TX_DMA */
@@ -177,11 +181,15 @@ uint8_t usart1_init(uint32_t baud_rate);
 uint8_t usart1_deinit(void); 
 
 #  if USART1_RX_DMA
+#    define USART1_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART1_RX_DMA_NUMBER, USART1_RX_DMA_CHANNEL)
 #    define USART1_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART1_RX_DMA_NUMBER, USART1_RX_DMA_CHANNEL)
 #  endif /* USART1_RX_DMA */
 
 #  if USART1_TX_DMA
+#    define USART1_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART1_TX_DMA_NUMBER, USART1_TX_DMA_CHANNEL)
 #    define USART1_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART1_TX_DMA_NUMBER, USART1_TX_DMA_CHANNEL)
 #  endif /* USART1_TX_DMA */
@@ -253,11 +261,15 @@ uint8_t usart2_init(uint32_t baud_rate);
 uint8_t usart2_deinit(void); 
 
 #  if USART2_RX_DMA
+#    define USART2_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART2_RX_DMA_NUMBER, USART2_RX_DMA_CHANNEL)
 #    define USART2_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART2_RX_DMA_NUMBER, USART2_RX_DMA_CHANNEL)
 #  endif /* USART2_RX_DMA */
 
 #  if USART2_TX_DMA
+#    define USART2_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART2_TX_DMA_NUMBER, USART2_TX_DMA_CHANNEL)
 #    define USART2_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART2_TX_DMA_NUMBER, USART2_TX_DMA_CHANNEL)
 #  endif /* USART2_TX_DMA */
@@ -347,11 +359,15 @@ uint8_t usart3_init(uint32_t baud_rate);
 uint8_t usart3_deinit(void); 
 
 #  if USART3_RX_DMA
+#    define USART3_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART3_RX_DMA_NUMBER, USART3_RX_DMA_CHANNEL)
 #    define USART3_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART3_RX_DMA_NUMBER, USART3_RX_DMA_CHANNEL)
 #  endif /* USART3_RX_DMA */
 
 #  if USART3_TX_DMA
+#    define USART3_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(USART3_TX_DMA_NUMBER, USART3_TX_DMA_CHANNEL)
 #    define USART3_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(USART3_TX_DMA_NUMBER, USART3_TX_DMA_CHANNEL)
 #  endif /* USART3_TX_DMA */
@@ -407,11 +423,15 @@ uint8_t uart4_init(uint32_t baud_rate);
 uint8_t uart4_deinit(void); 
 
 #  if UART4_RX_DMA
+#    define UART4_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(UART4_RX_DMA_NUMBER, UART4_RX_DMA_CHANNEL)
 #    define UART4_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(UART4_RX_DMA_NUMBER, UART4_RX_DMA_CHANNEL)
 #  endif /* UART4_RX_DMA */
 
 #  if UART4_TX_DMA
+#    define UART4_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(UART4_TX_DMA_NUMBER, UART4_TX_DMA_CHANNEL)
 #    define UART4_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(UART4_TX_DMA_NUMBER, UART4_TX_DMA_CHANNEL)
 #  endif /* UART4_TX_DMA */
@@ -467,11 +487,15 @@ uint8_t uart5_init(uint32_t baud_rate);
 uint8_t uart5_deinit(void); 
 
 #  if UART5_RX_DMA
+#    define UART5_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(UART5_RX_DMA_NUMBER, UART5_RX_DMA_CHANNEL)
 #    define UART5_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(UART5_RX_DMA_NUMBER, UART5_RX_DMA_CHANNEL)
 #  endif /* UART5_RX_DMA */
 
 #  if UART5_TX_DMA
+#    define UART5_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(UART5_TX_DMA_NUMBER, UART5_TX_DMA_CHANNEL)
 #    define UART5_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(UART5_TX_DMA_NUMBER, UART5_TX_DMA_CHANNEL)
 #  endif /* UART5_TX_DMA */

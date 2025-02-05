@@ -4,8 +4,8 @@
  * @author  Deadline039
  * @brief   Chip Support Package of I2C on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
- * @note    Generate Automatically. 
+ * @date    2025-02-05
+ * @note    Generate Automatically.
  */
 
 #include <CSP_Config.h>
@@ -68,8 +68,7 @@ static DMA_HandleTypeDef i2c1_dmatx_handle = {
  * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
-uint8_t i2c1_init(uint32_t timing, uint32_t address,
-                  uint32_t address_mode) {
+uint8_t i2c1_init(uint32_t timing, uint32_t address, uint32_t address_mode) {
     if (HAL_I2C_GetState(&i2c1_handle) != RESET) {
         return I2C_INITED;
     }
@@ -109,11 +108,9 @@ uint8_t i2c1_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c1_handle, hdmarx, i2c1_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C1_RX_DMA_NUMBER, I2C1_RX_DMA_CHANNEL),
-        I2C1_RX_DMA_IT_PRIORITY, I2C1_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C1_RX_DMA_NUMBER, I2C1_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C1_RX_DMA_IRQn, I2C1_RX_DMA_IT_PRIORITY,
+                         I2C1_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C1_RX_DMA_IRQn);
 
 #endif /* I2C1_RX_DMA */
 
@@ -127,11 +124,9 @@ uint8_t i2c1_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c1_handle, hdmatx, i2c1_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C1_TX_DMA_NUMBER, I2C1_TX_DMA_CHANNEL),
-        I2C1_TX_DMA_IT_PRIORITY, I2C1_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C1_TX_DMA_NUMBER, I2C1_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C1_TX_DMA_IRQn, I2C1_TX_DMA_IT_PRIORITY,
+                         I2C1_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C1_TX_DMA_IRQn);
 
 #endif /* I2C1_TX_DMA */
 
@@ -203,8 +198,7 @@ uint8_t i2c1_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C1_RX_DMA_NUMBER, I2C1_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C1_RX_DMA_IRQn);
     i2c1_handle.hdmarx = NULL;
 #endif /* I2C1_RX_DMA */
 
@@ -214,8 +208,7 @@ uint8_t i2c1_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C1_TX_DMA_NUMBER, I2C1_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C1_TX_DMA_IRQn);
     i2c1_handle.hdmatx = NULL;
 #endif /* I2C1_TX_DMA */
 
@@ -288,8 +281,7 @@ static DMA_HandleTypeDef i2c2_dmatx_handle = {
  * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
-uint8_t i2c2_init(uint32_t timing, uint32_t address,
-                  uint32_t address_mode) {
+uint8_t i2c2_init(uint32_t timing, uint32_t address, uint32_t address_mode) {
     if (HAL_I2C_GetState(&i2c2_handle) != RESET) {
         return I2C_INITED;
     }
@@ -329,11 +321,9 @@ uint8_t i2c2_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c2_handle, hdmarx, i2c2_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C2_RX_DMA_NUMBER, I2C2_RX_DMA_CHANNEL),
-        I2C2_RX_DMA_IT_PRIORITY, I2C2_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C2_RX_DMA_NUMBER, I2C2_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C2_RX_DMA_IRQn, I2C2_RX_DMA_IT_PRIORITY,
+                         I2C2_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C2_RX_DMA_IRQn);
 
 #endif /* I2C2_RX_DMA */
 
@@ -347,11 +337,9 @@ uint8_t i2c2_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c2_handle, hdmatx, i2c2_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C2_TX_DMA_NUMBER, I2C2_TX_DMA_CHANNEL),
-        I2C2_TX_DMA_IT_PRIORITY, I2C2_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C2_TX_DMA_NUMBER, I2C2_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C2_TX_DMA_IRQn, I2C2_TX_DMA_IT_PRIORITY,
+                         I2C2_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C2_TX_DMA_IRQn);
 
 #endif /* I2C2_TX_DMA */
 
@@ -423,8 +411,7 @@ uint8_t i2c2_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C2_RX_DMA_NUMBER, I2C2_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C2_RX_DMA_IRQn);
     i2c2_handle.hdmarx = NULL;
 #endif /* I2C2_RX_DMA */
 
@@ -434,8 +421,7 @@ uint8_t i2c2_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C2_TX_DMA_NUMBER, I2C2_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C2_TX_DMA_IRQn);
     i2c2_handle.hdmatx = NULL;
 #endif /* I2C2_TX_DMA */
 
@@ -508,8 +494,7 @@ static DMA_HandleTypeDef i2c3_dmatx_handle = {
  * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
-uint8_t i2c3_init(uint32_t timing, uint32_t address,
-                  uint32_t address_mode) {
+uint8_t i2c3_init(uint32_t timing, uint32_t address, uint32_t address_mode) {
     if (HAL_I2C_GetState(&i2c3_handle) != RESET) {
         return I2C_INITED;
     }
@@ -549,11 +534,9 @@ uint8_t i2c3_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c3_handle, hdmarx, i2c3_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C3_RX_DMA_NUMBER, I2C3_RX_DMA_CHANNEL),
-        I2C3_RX_DMA_IT_PRIORITY, I2C3_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C3_RX_DMA_NUMBER, I2C3_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C3_RX_DMA_IRQn, I2C3_RX_DMA_IT_PRIORITY,
+                         I2C3_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C3_RX_DMA_IRQn);
 
 #endif /* I2C3_RX_DMA */
 
@@ -567,11 +550,9 @@ uint8_t i2c3_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c3_handle, hdmatx, i2c3_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C3_TX_DMA_NUMBER, I2C3_TX_DMA_CHANNEL),
-        I2C3_TX_DMA_IT_PRIORITY, I2C3_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C3_TX_DMA_NUMBER, I2C3_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C3_TX_DMA_IRQn, I2C3_TX_DMA_IT_PRIORITY,
+                         I2C3_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C3_TX_DMA_IRQn);
 
 #endif /* I2C3_TX_DMA */
 
@@ -643,8 +624,7 @@ uint8_t i2c3_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C3_RX_DMA_NUMBER, I2C3_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C3_RX_DMA_IRQn);
     i2c3_handle.hdmarx = NULL;
 #endif /* I2C3_RX_DMA */
 
@@ -654,8 +634,7 @@ uint8_t i2c3_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C3_TX_DMA_NUMBER, I2C3_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C3_TX_DMA_IRQn);
     i2c3_handle.hdmatx = NULL;
 #endif /* I2C3_TX_DMA */
 
@@ -728,8 +707,7 @@ static DMA_HandleTypeDef i2c4_dmatx_handle = {
  * @note You can use STM32CubeMX or the following tool to get the Timing value.
  *       https://github.com/nemuisan/STM32_I2C_Timing_Keisan
  */
-uint8_t i2c4_init(uint32_t timing, uint32_t address,
-                  uint32_t address_mode) {
+uint8_t i2c4_init(uint32_t timing, uint32_t address, uint32_t address_mode) {
     if (HAL_I2C_GetState(&i2c4_handle) != RESET) {
         return I2C_INITED;
     }
@@ -769,11 +747,9 @@ uint8_t i2c4_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c4_handle, hdmarx, i2c4_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C4_RX_DMA_NUMBER, I2C4_RX_DMA_CHANNEL),
-        I2C4_RX_DMA_IT_PRIORITY, I2C4_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C4_RX_DMA_NUMBER, I2C4_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C4_RX_DMA_IRQn, I2C4_RX_DMA_IT_PRIORITY,
+                         I2C4_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C4_RX_DMA_IRQn);
 
 #endif /* I2C4_RX_DMA */
 
@@ -787,11 +763,9 @@ uint8_t i2c4_init(uint32_t timing, uint32_t address,
 
     __HAL_LINKDMA(&i2c4_handle, hdmatx, i2c4_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(I2C4_TX_DMA_NUMBER, I2C4_TX_DMA_CHANNEL),
-        I2C4_TX_DMA_IT_PRIORITY, I2C4_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C4_TX_DMA_NUMBER, I2C4_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(I2C4_TX_DMA_IRQn, I2C4_TX_DMA_IT_PRIORITY,
+                         I2C4_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(I2C4_TX_DMA_IRQn);
 
 #endif /* I2C4_TX_DMA */
 
@@ -863,8 +837,7 @@ uint8_t i2c4_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C4_RX_DMA_NUMBER, I2C4_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C4_RX_DMA_IRQn);
     i2c4_handle.hdmarx = NULL;
 #endif /* I2C4_RX_DMA */
 
@@ -874,8 +847,7 @@ uint8_t i2c4_deinit(void) {
         return I2C_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(I2C4_TX_DMA_NUMBER, I2C4_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(I2C4_TX_DMA_IRQn);
     i2c4_handle.hdmatx = NULL;
 #endif /* I2C4_TX_DMA */
 

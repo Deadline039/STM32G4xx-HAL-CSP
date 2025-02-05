@@ -4,14 +4,13 @@
  * @author  Deadline039
  * @brief   Chip Support Package of SPI on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
- * @note    Generate Automatically. 
+ * @date    2025-02-05
+ * @note    Generate Automatically.
  */
 
 #include <CSP_Config.h>
 
 #include "SPI_STM32G4xx.h"
-
 
 /*****************************************************************************
  * @defgroup SPI1 Functions.
@@ -131,11 +130,9 @@ uint8_t spi1_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi1_handle, hdmarx, spi1_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL),
-        SPI1_RX_DMA_IT_PRIORITY, SPI1_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI1_RX_DMA_IRQn, SPI1_RX_DMA_IT_PRIORITY,
+                         SPI1_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI1_RX_DMA_IRQn);
 
 #endif /* SPI1_RX_DMA */
 
@@ -156,11 +153,9 @@ uint8_t spi1_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi1_handle, hdmatx, spi1_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI1_TX_DMA_NUMBER, SPI1_TX_DMA_CHANNEL),
-        SPI1_TX_DMA_IT_PRIORITY, SPI1_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI1_TX_DMA_NUMBER, SPI1_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI1_TX_DMA_IRQn, SPI1_TX_DMA_IT_PRIORITY,
+                         SPI1_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI1_TX_DMA_IRQn);
 
 #endif /* SPI1_TX_DMA */
 
@@ -249,8 +244,7 @@ uint8_t spi1_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI1_RX_DMA_IRQn);
     spi1_handle.hdmarx = NULL;
 #endif /* SPI1_RX_DMA */
 
@@ -259,8 +253,7 @@ uint8_t spi1_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI1_TX_DMA_IRQn);
     spi1_handle.hdmatx = NULL;
 #endif /* SPI1_TX_DMA */
 
@@ -280,7 +273,6 @@ uint8_t spi1_deinit(void) {
 /**
  * @}
  */
-
 
 /*****************************************************************************
  * @defgroup SPI2 Functions.
@@ -400,11 +392,9 @@ uint8_t spi2_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi2_handle, hdmarx, spi2_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL),
-        SPI2_RX_DMA_IT_PRIORITY, SPI2_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI2_RX_DMA_IRQn, SPI2_RX_DMA_IT_PRIORITY,
+                         SPI2_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI2_RX_DMA_IRQn);
 
 #endif /* SPI2_RX_DMA */
 
@@ -425,11 +415,9 @@ uint8_t spi2_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi2_handle, hdmatx, spi2_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI2_TX_DMA_NUMBER, SPI2_TX_DMA_CHANNEL),
-        SPI2_TX_DMA_IT_PRIORITY, SPI2_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI2_TX_DMA_NUMBER, SPI2_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI2_TX_DMA_IRQn, SPI2_TX_DMA_IT_PRIORITY,
+                         SPI2_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI2_TX_DMA_IRQn);
 
 #endif /* SPI2_TX_DMA */
 
@@ -518,8 +506,7 @@ uint8_t spi2_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI2_RX_DMA_IRQn);
     spi2_handle.hdmarx = NULL;
 #endif /* SPI2_RX_DMA */
 
@@ -528,8 +515,7 @@ uint8_t spi2_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI2_TX_DMA_IRQn);
     spi2_handle.hdmatx = NULL;
 #endif /* SPI2_TX_DMA */
 
@@ -549,7 +535,6 @@ uint8_t spi2_deinit(void) {
 /**
  * @}
  */
-
 
 /*****************************************************************************
  * @defgroup SPI3 Functions.
@@ -669,11 +654,9 @@ uint8_t spi3_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi3_handle, hdmarx, spi3_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL),
-        SPI3_RX_DMA_IT_PRIORITY, SPI3_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI3_RX_DMA_IRQn, SPI3_RX_DMA_IT_PRIORITY,
+                         SPI3_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI3_RX_DMA_IRQn);
 
 #endif /* SPI3_RX_DMA */
 
@@ -694,11 +677,9 @@ uint8_t spi3_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi3_handle, hdmatx, spi3_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI3_TX_DMA_NUMBER, SPI3_TX_DMA_CHANNEL),
-        SPI3_TX_DMA_IT_PRIORITY, SPI3_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI3_TX_DMA_NUMBER, SPI3_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI3_TX_DMA_IRQn, SPI3_TX_DMA_IT_PRIORITY,
+                         SPI3_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI3_TX_DMA_IRQn);
 
 #endif /* SPI3_TX_DMA */
 
@@ -787,8 +768,7 @@ uint8_t spi3_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI3_RX_DMA_IRQn);
     spi3_handle.hdmarx = NULL;
 #endif /* SPI3_RX_DMA */
 
@@ -797,8 +777,7 @@ uint8_t spi3_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI3_TX_DMA_IRQn);
     spi3_handle.hdmatx = NULL;
 #endif /* SPI3_TX_DMA */
 
@@ -818,7 +797,6 @@ uint8_t spi3_deinit(void) {
 /**
  * @}
  */
-
 
 /*****************************************************************************
  * @defgroup SPI4 Functions.
@@ -938,11 +916,9 @@ uint8_t spi4_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi4_handle, hdmarx, spi4_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL),
-        SPI4_RX_DMA_IT_PRIORITY, SPI4_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI4_RX_DMA_IRQn, SPI4_RX_DMA_IT_PRIORITY,
+                         SPI4_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI4_RX_DMA_IRQn);
 
 #endif /* SPI4_RX_DMA */
 
@@ -963,11 +939,9 @@ uint8_t spi4_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 
     __HAL_LINKDMA(&spi4_handle, hdmatx, spi4_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(SPI4_TX_DMA_NUMBER, SPI4_TX_DMA_CHANNEL),
-        SPI4_TX_DMA_IT_PRIORITY, SPI4_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI4_TX_DMA_NUMBER, SPI4_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(SPI4_TX_DMA_IRQn, SPI4_TX_DMA_IT_PRIORITY,
+                         SPI4_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(SPI4_TX_DMA_IRQn);
 
 #endif /* SPI4_TX_DMA */
 
@@ -1056,8 +1030,7 @@ uint8_t spi4_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI4_RX_DMA_IRQn);
     spi4_handle.hdmarx = NULL;
 #endif /* SPI4_RX_DMA */
 
@@ -1066,8 +1039,7 @@ uint8_t spi4_deinit(void) {
         return SPI_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(SPI4_TX_DMA_IRQn);
     spi4_handle.hdmatx = NULL;
 #endif /* SPI4_TX_DMA */
 

@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   Chip Support Package of SPI and QSPI on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
+ * @date    2025-02-05
  * @note    Generate Automatically.
  */
 
@@ -106,11 +106,15 @@ uint8_t spi1_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 uint8_t spi1_deinit(void); 
 
 #  if SPI1_RX_DMA
+#    define SPI1_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL)
 #    define SPI1_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI1_RX_DMA_NUMBER, SPI1_RX_DMA_CHANNEL)
 #  endif /* SPI1_RX_DMA */
 
 #  if SPI1_TX_DMA
+#    define SPI1_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI1_TX_DMA_NUMBER, SPI1_TX_DMA_CHANNEL)
 #    define SPI1_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI1_TX_DMA_NUMBER, SPI1_TX_DMA_CHANNEL)
 #  endif /* SPI1_TX_DMA */
@@ -177,11 +181,15 @@ uint8_t spi2_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 uint8_t spi2_deinit(void); 
 
 #  if SPI2_RX_DMA
+#    define SPI2_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL)
 #    define SPI2_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI2_RX_DMA_NUMBER, SPI2_RX_DMA_CHANNEL)
 #  endif /* SPI2_RX_DMA */
 
 #  if SPI2_TX_DMA
+#    define SPI2_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI2_TX_DMA_NUMBER, SPI2_TX_DMA_CHANNEL)
 #    define SPI2_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI2_TX_DMA_NUMBER, SPI2_TX_DMA_CHANNEL)
 #  endif /* SPI2_TX_DMA */
@@ -247,11 +255,15 @@ uint8_t spi3_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 uint8_t spi3_deinit(void); 
 
 #  if SPI3_RX_DMA
+#    define SPI3_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL)
 #    define SPI3_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI3_RX_DMA_NUMBER, SPI3_RX_DMA_CHANNEL)
 #  endif /* SPI3_RX_DMA */
 
 #  if SPI3_TX_DMA
+#    define SPI3_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI3_TX_DMA_NUMBER, SPI3_TX_DMA_CHANNEL)
 #    define SPI3_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI3_TX_DMA_NUMBER, SPI3_TX_DMA_CHANNEL)
 #  endif /* SPI3_TX_DMA */
@@ -332,11 +344,15 @@ uint8_t spi4_init(uint32_t mode, spi_clk_mode_t clk_mode, uint32_t data_size,
 uint8_t spi4_deinit(void); 
 
 #  if SPI4_RX_DMA
+#    define SPI4_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL)
 #    define SPI4_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI4_RX_DMA_NUMBER, SPI4_RX_DMA_CHANNEL)
 #  endif /* SPI4_RX_DMA */
 
 #  if SPI4_TX_DMA
+#    define SPI4_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(SPI4_TX_DMA_NUMBER, SPI4_TX_DMA_CHANNEL)
 #    define SPI4_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(SPI4_TX_DMA_NUMBER, SPI4_TX_DMA_CHANNEL)
 #  endif /* SPI4_TX_DMA */

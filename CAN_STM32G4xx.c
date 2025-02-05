@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   Chip Support Package of FDCAN on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
+ * @date    2025-02-05
  * @note    We will support FDCAN in the feature.
  *          Generate Automatically. 
  */
@@ -29,7 +29,6 @@ FDCAN_HandleTypeDef fdcan1_handle = {
              .AutoRetransmission = ENABLE,
              .TransmitPause = DISABLE,
              .ProtocolException = ENABLE,
-
              .TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION}};
 
 /**
@@ -179,7 +178,6 @@ FDCAN_HandleTypeDef fdcan2_handle = {
              .AutoRetransmission = ENABLE,
              .TransmitPause = DISABLE,
              .ProtocolException = ENABLE,
-
              .TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION}};
 
 /**
@@ -329,7 +327,6 @@ FDCAN_HandleTypeDef fdcan3_handle = {
              .AutoRetransmission = ENABLE,
              .TransmitPause = DISABLE,
              .ProtocolException = ENABLE,
-
              .TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION}};
 
 /**

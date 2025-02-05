@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   The CSP configuration of STM32G4xx.
  * @version 1.0
- * @date    2024-12-07
+ * @date    2025-02-05
  * @note    Generate Automatically.
  */
 
@@ -205,7 +205,7 @@
 
 // <e> USART1 (Universal asynchronous receiver transmitter)
 
-#define USART1_ENABLE 1 
+#define USART1_ENABLE 1
 
 #if USART1_ENABLE
 
@@ -2766,29 +2766,6 @@
 #endif  /* FDCAN3_ENABLE */
 // </e>
 
-// <e> RTC (Real Time Clock)
-#define RTC_ENABLE            0
-
-//   <e> RTC Wake Up Interrupt
-#define RTC_WKUP_IT_ENABLE    0
-//      <o> RTC Wake up Interrupt Priority <0-15>
-//      <i> The Interrupt Priority of RTC Wake up
-#define RTC_WKUP_IT_PRIORITY  2
-//      <o> RTC Wake up Interrupt SubPriority <0-15>
-//      <i> The Interrupt SubPriority of RTC Wake up
-#define RTC_WKUP_IT_SUB       3
-//   </e>
-
-//   <e> RTC Alarm Interrupt
-#define RTC_ALARM_IT_ENABLE   0
-//      <o> RTC Alarm  Interrupt Priority <0-15>
-//      <i> The Interrupt Priority of RTC Alarm
-#define RTC_ALARM_IT_PRIORITY 2
-//      <o> RTC Alarm Interrupt SubPriority <0-15>
-//      <i> The Interrupt SubPriority of RTC Alarm
-#define RTC_ALARM_IT_SUB      3
-//   </e>
-
 //------------- <<< end of configuration section >>> -----------------------
 
 #ifdef __cplusplus
@@ -2820,9 +2797,9 @@ extern "C" {
 #define CSP_DMA_CLK_ENABLE(x)      _CSP_DMA_CLK_ENABLE(x)
 
 /* CSP memory management functions. */
-#define CSP_MALLOC                 malloc
-#define CSP_FREE                   free
-#define CSP_REALLOC                realloc
+#define CSP_MALLOC(x)              malloc(x)
+#define CSP_FREE(x)                free(x)
+#define CSP_REALLOC(p, x)          realloc(p, x)
 #include <stdlib.h>
 
 /* Devices Family header files.  */

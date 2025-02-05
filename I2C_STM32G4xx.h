@@ -4,7 +4,7 @@
  * @author  Deadline039
  * @brief   Chip Support Package of I2C on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
+ * @date    2025-02-05
  * @note    Generate Automatically.
  */
 
@@ -72,11 +72,15 @@ uint8_t i2c1_init(uint32_t timing, uint32_t address,
 uint8_t i2c1_deinit(void); 
 
 #  if I2C1_RX_DMA
+#    define I2C1_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C1_RX_DMA_NUMBER, I2C1_RX_DMA_CHANNEL)
 #    define I2C1_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C1_RX_DMA_NUMBER, I2C1_RX_DMA_CHANNEL)
 #  endif /* I2C1_RX_DMA */
 
 #  if I2C1_TX_DMA
+#    define I2C1_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C1_TX_DMA_NUMBER, I2C1_TX_DMA_CHANNEL)
 #    define I2C1_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C1_TX_DMA_NUMBER, I2C1_TX_DMA_CHANNEL)
 #  endif /* I2C1_TX_DMA */
@@ -129,11 +133,15 @@ uint8_t i2c2_init(uint32_t timing, uint32_t address,
 uint8_t i2c2_deinit(void); 
 
 #  if I2C2_RX_DMA
+#    define I2C2_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C2_RX_DMA_NUMBER, I2C2_RX_DMA_CHANNEL)
 #    define I2C2_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C2_RX_DMA_NUMBER, I2C2_RX_DMA_CHANNEL)
 #  endif /* I2C2_RX_DMA */
 
 #  if I2C2_TX_DMA
+#    define I2C2_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C2_TX_DMA_NUMBER, I2C2_TX_DMA_CHANNEL)
 #    define I2C2_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C2_TX_DMA_NUMBER, I2C2_TX_DMA_CHANNEL)
 #  endif /* I2C2_TX_DMA */
@@ -209,11 +217,15 @@ uint8_t i2c3_init(uint32_t timing, uint32_t address,
 uint8_t i2c3_deinit(void); 
 
 #  if I2C3_RX_DMA
+#    define I2C3_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C3_RX_DMA_NUMBER, I2C3_RX_DMA_CHANNEL)
 #    define I2C3_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C3_RX_DMA_NUMBER, I2C3_RX_DMA_CHANNEL)
 #  endif /* I2C3_RX_DMA */
 
 #  if I2C3_TX_DMA
+#    define I2C3_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C3_TX_DMA_NUMBER, I2C3_TX_DMA_CHANNEL)
 #    define I2C3_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C3_TX_DMA_NUMBER, I2C3_TX_DMA_CHANNEL)
 #  endif /* I2C3_TX_DMA */
@@ -287,11 +299,15 @@ uint8_t i2c4_init(uint32_t timing, uint32_t address,
 uint8_t i2c4_deinit(void); 
 
 #  if I2C4_RX_DMA
+#    define I2C4_RX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C4_RX_DMA_NUMBER, I2C4_RX_DMA_CHANNEL)
 #    define I2C4_RX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C4_RX_DMA_NUMBER, I2C4_RX_DMA_CHANNEL)
 #  endif /* I2C4_RX_DMA */
 
 #  if I2C4_TX_DMA
+#    define I2C4_TX_DMA_IRQn                                                  \
+      CSP_DMA_CHANNEL_IRQn(I2C4_TX_DMA_NUMBER, I2C4_TX_DMA_CHANNEL)
 #    define I2C4_TX_DMA_IRQHandler                                             \
       CSP_DMA_CHANNEL_IRQ(I2C4_TX_DMA_NUMBER, I2C4_TX_DMA_CHANNEL)
 #  endif /* I2C4_TX_DMA */

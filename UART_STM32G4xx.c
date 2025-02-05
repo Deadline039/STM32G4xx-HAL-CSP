@@ -4,8 +4,8 @@
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
  * @version 1.0
- * @date    2024-12-07
- * @note    Generate Automatically.
+ * @date    2025-02-05
+ * @note    Generate Automatically. 
  */
 
 #include <CSP_Config.h>
@@ -72,9 +72,9 @@ void uart_dmarx_idle_callback(UART_HandleTypeDef *huart);
 #if LPUART1_ENABLE
 
 UART_HandleTypeDef lpuart1_handle = {.Instance = LPUART1,
-                                     .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                              .StopBits = UART_STOPBITS_1,
-                                              .Parity = UART_PARITY_NONE}};
+                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                             .StopBits = UART_STOPBITS_1,
+                                             .Parity = UART_PARITY_NONE}};
 
 #if LPUART1_RX_DMA
 
@@ -90,7 +90,7 @@ static DMA_HandleTypeDef lpuart1_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(LPUART1_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t lpuart1_rx_fifo = {.buf_size = LPUART1_RX_DMA_BUF_SIZE,
-                                         .fifo_size = LPUART1_RX_DMA_FIFO_SIZE};
+                                        .fifo_size = LPUART1_RX_DMA_FIFO_SIZE};
 
 #endif /* LPUART1_RX_DMA */
 
@@ -200,11 +200,9 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&lpuart1_handle, hdmarx, lpuart1_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL),
-        LPUART1_RX_DMA_IT_PRIORITY, LPUART1_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(LPUART1_RX_DMA_IRQn, LPUART1_RX_DMA_IT_PRIORITY,
+                         LPUART1_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(LPUART1_RX_DMA_IRQn);
 
 #endif /* LPUART1_RX_DMA */
 
@@ -221,19 +219,17 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&lpuart1_handle, hdmatx, lpuart1_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_TX_DMA_NUMBER, LPUART1_TX_DMA_CHANNEL),
-        LPUART1_TX_DMA_IT_PRIORITY, LPUART1_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_TX_DMA_NUMBER, LPUART1_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(LPUART1_TX_DMA_IRQn, LPUART1_TX_DMA_IT_PRIORITY,
+                         LPUART1_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(LPUART1_TX_DMA_IRQn);
 #endif /* LPUART1_TX_DMA */
 
     if (HAL_UART_Init(&lpuart1_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&lpuart1_handle);
-
+    
 #if LPUART1_RX_DMA
     __HAL_UART_ENABLE_IT(&lpuart1_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&lpuart1_handle);
@@ -339,12 +335,10 @@ uint8_t lpuart1_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_RX_DMA_NUMBER, LPUART1_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(LPUART1_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
-    HAL_UART_UnRegisterCallback(&lpuart1_handle,
-                                HAL_UART_RX_HALFCOMPLETE_CB_ID);
+    HAL_UART_UnRegisterCallback(&lpuart1_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
     HAL_UART_UnRegisterCallback(&lpuart1_handle, HAL_UART_RX_COMPLETE_CB_ID);
 #endif /* USE_HAL_UART_REGISTER_CALLBACKS */
     lpuart1_handle.hdmarx = NULL;
@@ -359,8 +353,7 @@ uint8_t lpuart1_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(LPUART1_TX_DMA_NUMBER, LPUART1_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(LPUART1_TX_DMA_IRQn);
 
     lpuart1_handle.hdmatx = NULL;
 #endif /* LPUART1_TX_DMA */
@@ -376,7 +369,8 @@ uint8_t lpuart1_deinit(void) {
 
 /**
  * @}
- */
+ */ 
+
 
 /*****************************************************************************
  * @defgroup USART1 Functions
@@ -514,11 +508,9 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart1_handle, hdmarx, usart1_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART1_RX_DMA_NUMBER, USART1_RX_DMA_CHANNEL),
-        USART1_RX_DMA_IT_PRIORITY, USART1_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART1_RX_DMA_NUMBER, USART1_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART1_RX_DMA_IRQn, USART1_RX_DMA_IT_PRIORITY,
+                         USART1_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART1_RX_DMA_IRQn);
 
 #endif /* USART1_RX_DMA */
 
@@ -535,19 +527,17 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart1_handle, hdmatx, usart1_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART1_TX_DMA_NUMBER, USART1_TX_DMA_CHANNEL),
-        USART1_TX_DMA_IT_PRIORITY, USART1_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART1_TX_DMA_NUMBER, USART1_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART1_TX_DMA_IRQn, USART1_TX_DMA_IT_PRIORITY,
+                         USART1_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART1_TX_DMA_IRQn);
 #endif /* USART1_TX_DMA */
 
     if (HAL_UART_Init(&usart1_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&usart1_handle);
-
+    
 #if USART1_RX_DMA
     __HAL_UART_ENABLE_IT(&usart1_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart1_handle);
@@ -653,8 +643,7 @@ uint8_t usart1_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART1_RX_DMA_NUMBER, USART1_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART1_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
     HAL_UART_UnRegisterCallback(&usart1_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
@@ -672,8 +661,7 @@ uint8_t usart1_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART1_TX_DMA_NUMBER, USART1_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART1_TX_DMA_IRQn);
 
     usart1_handle.hdmatx = NULL;
 #endif /* USART1_TX_DMA */
@@ -689,7 +677,8 @@ uint8_t usart1_deinit(void) {
 
 /**
  * @}
- */
+ */ 
+
 
 /*****************************************************************************
  * @defgroup USART2 Functions
@@ -827,11 +816,9 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart2_handle, hdmarx, usart2_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART2_RX_DMA_NUMBER, USART2_RX_DMA_CHANNEL),
-        USART2_RX_DMA_IT_PRIORITY, USART2_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART2_RX_DMA_NUMBER, USART2_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART2_RX_DMA_IRQn, USART2_RX_DMA_IT_PRIORITY,
+                         USART2_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART2_RX_DMA_IRQn);
 
 #endif /* USART2_RX_DMA */
 
@@ -848,19 +835,17 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart2_handle, hdmatx, usart2_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART2_TX_DMA_NUMBER, USART2_TX_DMA_CHANNEL),
-        USART2_TX_DMA_IT_PRIORITY, USART2_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART2_TX_DMA_NUMBER, USART2_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART2_TX_DMA_IRQn, USART2_TX_DMA_IT_PRIORITY,
+                         USART2_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART2_TX_DMA_IRQn);
 #endif /* USART2_TX_DMA */
 
     if (HAL_UART_Init(&usart2_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&usart2_handle);
-
+    
 #if USART2_RX_DMA
     __HAL_UART_ENABLE_IT(&usart2_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart2_handle);
@@ -966,8 +951,7 @@ uint8_t usart2_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART2_RX_DMA_NUMBER, USART2_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART2_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
     HAL_UART_UnRegisterCallback(&usart2_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
@@ -985,8 +969,7 @@ uint8_t usart2_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART2_TX_DMA_NUMBER, USART2_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART2_TX_DMA_IRQn);
 
     usart2_handle.hdmatx = NULL;
 #endif /* USART2_TX_DMA */
@@ -1002,7 +985,8 @@ uint8_t usart2_deinit(void) {
 
 /**
  * @}
- */
+ */ 
+
 
 /*****************************************************************************
  * @defgroup USART3 Functions
@@ -1140,11 +1124,9 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart3_handle, hdmarx, usart3_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART3_RX_DMA_NUMBER, USART3_RX_DMA_CHANNEL),
-        USART3_RX_DMA_IT_PRIORITY, USART3_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART3_RX_DMA_NUMBER, USART3_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART3_RX_DMA_IRQn, USART3_RX_DMA_IT_PRIORITY,
+                         USART3_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART3_RX_DMA_IRQn);
 
 #endif /* USART3_RX_DMA */
 
@@ -1161,19 +1143,17 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&usart3_handle, hdmatx, usart3_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(USART3_TX_DMA_NUMBER, USART3_TX_DMA_CHANNEL),
-        USART3_TX_DMA_IT_PRIORITY, USART3_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART3_TX_DMA_NUMBER, USART3_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(USART3_TX_DMA_IRQn, USART3_TX_DMA_IT_PRIORITY,
+                         USART3_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(USART3_TX_DMA_IRQn);
 #endif /* USART3_TX_DMA */
 
     if (HAL_UART_Init(&usart3_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&usart3_handle);
-
+    
 #if USART3_RX_DMA
     __HAL_UART_ENABLE_IT(&usart3_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&usart3_handle);
@@ -1279,8 +1259,7 @@ uint8_t usart3_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART3_RX_DMA_NUMBER, USART3_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART3_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
     HAL_UART_UnRegisterCallback(&usart3_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
@@ -1298,8 +1277,7 @@ uint8_t usart3_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(USART3_TX_DMA_NUMBER, USART3_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(USART3_TX_DMA_IRQn);
 
     usart3_handle.hdmatx = NULL;
 #endif /* USART3_TX_DMA */
@@ -1315,7 +1293,8 @@ uint8_t usart3_deinit(void) {
 
 /**
  * @}
- */
+ */ 
+
 
 /*****************************************************************************
  * @defgroup UART4 Functions
@@ -1325,9 +1304,9 @@ uint8_t usart3_deinit(void) {
 #if UART4_ENABLE
 
 UART_HandleTypeDef uart4_handle = {.Instance = UART4,
-                                   .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                            .StopBits = UART_STOPBITS_1,
-                                            .Parity = UART_PARITY_NONE}};
+                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                             .StopBits = UART_STOPBITS_1,
+                                             .Parity = UART_PARITY_NONE}};
 
 #if UART4_RX_DMA
 
@@ -1343,7 +1322,7 @@ static DMA_HandleTypeDef uart4_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(UART4_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t uart4_rx_fifo = {.buf_size = UART4_RX_DMA_BUF_SIZE,
-                                       .fifo_size = UART4_RX_DMA_FIFO_SIZE};
+                                        .fifo_size = UART4_RX_DMA_FIFO_SIZE};
 
 #endif /* UART4_RX_DMA */
 
@@ -1453,11 +1432,9 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&uart4_handle, hdmarx, uart4_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(UART4_RX_DMA_NUMBER, UART4_RX_DMA_CHANNEL),
-        UART4_RX_DMA_IT_PRIORITY, UART4_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART4_RX_DMA_NUMBER, UART4_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(UART4_RX_DMA_IRQn, UART4_RX_DMA_IT_PRIORITY,
+                         UART4_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(UART4_RX_DMA_IRQn);
 
 #endif /* UART4_RX_DMA */
 
@@ -1474,19 +1451,17 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&uart4_handle, hdmatx, uart4_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(UART4_TX_DMA_NUMBER, UART4_TX_DMA_CHANNEL),
-        UART4_TX_DMA_IT_PRIORITY, UART4_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART4_TX_DMA_NUMBER, UART4_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(UART4_TX_DMA_IRQn, UART4_TX_DMA_IT_PRIORITY,
+                         UART4_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(UART4_TX_DMA_IRQn);
 #endif /* UART4_TX_DMA */
 
     if (HAL_UART_Init(&uart4_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&uart4_handle);
-
+    
 #if UART4_RX_DMA
     __HAL_UART_ENABLE_IT(&uart4_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&uart4_handle);
@@ -1592,8 +1567,7 @@ uint8_t uart4_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART4_RX_DMA_NUMBER, UART4_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(UART4_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
     HAL_UART_UnRegisterCallback(&uart4_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
@@ -1611,8 +1585,7 @@ uint8_t uart4_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART4_TX_DMA_NUMBER, UART4_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(UART4_TX_DMA_IRQn);
 
     uart4_handle.hdmatx = NULL;
 #endif /* UART4_TX_DMA */
@@ -1628,7 +1601,8 @@ uint8_t uart4_deinit(void) {
 
 /**
  * @}
- */
+ */ 
+
 
 /*****************************************************************************
  * @defgroup UART5 Functions
@@ -1638,9 +1612,9 @@ uint8_t uart4_deinit(void) {
 #if UART5_ENABLE
 
 UART_HandleTypeDef uart5_handle = {.Instance = UART5,
-                                   .Init = {.WordLength = UART_WORDLENGTH_8B,
-                                            .StopBits = UART_STOPBITS_1,
-                                            .Parity = UART_PARITY_NONE}};
+                                    .Init = {.WordLength = UART_WORDLENGTH_8B,
+                                             .StopBits = UART_STOPBITS_1,
+                                             .Parity = UART_PARITY_NONE}};
 
 #if UART5_RX_DMA
 
@@ -1656,7 +1630,7 @@ static DMA_HandleTypeDef uart5_dmarx_handle = {
              .Priority = CSP_DMA_PRIORITY(UART5_RX_DMA_PRIORITY)}};
 
 static uart_rx_fifo_t uart5_rx_fifo = {.buf_size = UART5_RX_DMA_BUF_SIZE,
-                                       .fifo_size = UART5_RX_DMA_FIFO_SIZE};
+                                        .fifo_size = UART5_RX_DMA_FIFO_SIZE};
 
 #endif /* UART5_RX_DMA */
 
@@ -1766,11 +1740,9 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&uart5_handle, hdmarx, uart5_dmarx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(UART5_RX_DMA_NUMBER, UART5_RX_DMA_CHANNEL),
-        UART5_RX_DMA_IT_PRIORITY, UART5_RX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART5_RX_DMA_NUMBER, UART5_RX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(UART5_RX_DMA_IRQn, UART5_RX_DMA_IT_PRIORITY,
+                         UART5_RX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(UART5_RX_DMA_IRQn);
 
 #endif /* UART5_RX_DMA */
 
@@ -1787,19 +1759,17 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     __HAL_LINKDMA(&uart5_handle, hdmatx, uart5_dmatx_handle);
 
-    HAL_NVIC_SetPriority(
-        CSP_DMA_CHANNEL_IRQn(UART5_TX_DMA_NUMBER, UART5_TX_DMA_CHANNEL),
-        UART5_TX_DMA_IT_PRIORITY, UART5_TX_DMA_IT_SUB);
-    HAL_NVIC_EnableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART5_TX_DMA_NUMBER, UART5_TX_DMA_CHANNEL));
+    HAL_NVIC_SetPriority(UART5_TX_DMA_IRQn, UART5_TX_DMA_IT_PRIORITY,
+                         UART5_TX_DMA_IT_SUB);
+    HAL_NVIC_EnableIRQ(UART5_TX_DMA_IRQn);
 #endif /* UART5_TX_DMA */
 
     if (HAL_UART_Init(&uart5_handle) != HAL_OK) {
         return UART_INIT_FAIL;
     }
-
+    
     HAL_UARTEx_DisableFifoMode(&uart5_handle);
-
+    
 #if UART5_RX_DMA
     __HAL_UART_ENABLE_IT(&uart5_handle, UART_IT_IDLE);
     __HAL_UART_CLEAR_IDLEFLAG(&uart5_handle);
@@ -1905,8 +1875,7 @@ uint8_t uart5_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART5_RX_DMA_NUMBER, UART5_RX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(UART5_RX_DMA_IRQn);
 
 #if USE_HAL_UART_REGISTER_CALLBACKS
     HAL_UART_UnRegisterCallback(&uart5_handle, HAL_UART_RX_HALFCOMPLETE_CB_ID);
@@ -1924,8 +1893,7 @@ uint8_t uart5_deinit(void) {
         return UART_DEINIT_DMA_FAIL;
     }
 
-    HAL_NVIC_DisableIRQ(
-        CSP_DMA_CHANNEL_IRQn(UART5_TX_DMA_NUMBER, UART5_TX_DMA_CHANNEL));
+    HAL_NVIC_DisableIRQ(UART5_TX_DMA_IRQn);
 
     uart5_handle.hdmatx = NULL;
 #endif /* UART5_TX_DMA */
@@ -1941,7 +1909,7 @@ uint8_t uart5_deinit(void) {
 
 /**
  * @}
- */
+ */ 
 
 /*****************************************************************************
  * @defgroup Public UART functions.
