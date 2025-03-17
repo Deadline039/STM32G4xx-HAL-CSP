@@ -855,7 +855,7 @@ uint8_t fdcan_send_message(can_selected_t can_selected, uint32_t can_ide,
 
     uint16_t wait_time = 0;
 
-    static FDCAN_TxHeaderTypeDef tx_header;
+    FDCAN_TxHeaderTypeDef tx_header = {0};
     tx_header.IdType = can_ide;
     tx_header.DataLength = len;
     tx_header.Identifier = id;
@@ -947,7 +947,7 @@ uint8_t fdcan_send_remote(can_selected_t can_selected, uint32_t can_ide,
 
     uint16_t wait_time = 0;
 
-    static FDCAN_TxHeaderTypeDef tx_header;
+    FDCAN_TxHeaderTypeDef tx_header = {0};
     tx_header.IdType = can_ide;
     tx_header.DataLength = len;
     tx_header.Identifier = id;
