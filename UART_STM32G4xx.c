@@ -1,10 +1,9 @@
-
 /**
  * @file    UART_STM32G4xx.c
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
- * @version 1.0
- * @date    2025-02-05
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    Generate Automatically. 
  */
 
@@ -87,7 +86,7 @@ static DMA_HandleTypeDef lpuart1_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(LPUART1_RX_DMA_PRIORITY)}};
+             .Priority = LPUART1_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t lpuart1_rx_fifo = {.buf_size = LPUART1_RX_DMA_BUF_SIZE,
                                         .fifo_size = LPUART1_RX_DMA_FIFO_SIZE};
@@ -105,7 +104,7 @@ static DMA_HandleTypeDef lpuart1_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(LPUART1_TX_DMA_PRIORITY)}};
+             .Priority = LPUART1_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t lpuart1_tx_buf = {.buf_size = LPUART1_TX_DMA_BUF_SIZE};
 
@@ -116,15 +115,15 @@ static uart_tx_buf_t lpuart1_tx_buf = {.buf_size = LPUART1_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return LPUART1 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t lpuart1_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&lpuart1_handle) != RESET) {
+    if (HAL_UART_GetState(&lpuart1_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -137,7 +136,7 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(LPUART1_TX_PORT);
     gpio_init_struct.Pin = LPUART1_TX_PIN;
-    gpio_init_struct.Alternate = LPUART1_TX_AF;
+    gpio_init_struct.Alternate = LPUART1_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(LPUART1_TX_PORT), &gpio_init_struct);
 #endif /* LPUART1_TX */
 
@@ -146,7 +145,7 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(LPUART1_RX_PORT);
     gpio_init_struct.Pin = LPUART1_RX_PIN;
-    gpio_init_struct.Alternate = LPUART1_RX_AF;
+    gpio_init_struct.Alternate = LPUART1_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(LPUART1_RX_PORT), &gpio_init_struct);
 #endif /* LPUART1_RX */
 
@@ -155,7 +154,7 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(LPUART1_CTS_PORT);
     gpio_init_struct.Pin = LPUART1_CTS_PIN;
-    gpio_init_struct.Alternate = LPUART1_CTS_AF;
+    gpio_init_struct.Alternate = LPUART1_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(LPUART1_CTS_PORT), &gpio_init_struct);
 #endif /* LPUART1_LPUART1_CTS */
 
@@ -164,7 +163,7 @@ uint8_t lpuart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(LPUART1_RTS_PORT);
     gpio_init_struct.Pin = LPUART1_RTS_PIN;
-    gpio_init_struct.Alternate = LPUART1_RTS_AF;
+    gpio_init_struct.Alternate = LPUART1_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(LPUART1_RTS_PORT), &gpio_init_struct);
 #endif /* LPUART1_RTS */
 
@@ -292,13 +291,13 @@ void LPUART1_TX_DMA_IRQHandler(void) {
  * @brief LPUART1 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t lpuart1_deinit(void) {
-    if (HAL_UART_GetState(&lpuart1_handle) == RESET) {
+    if (HAL_UART_GetState(&lpuart1_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -395,7 +394,7 @@ static DMA_HandleTypeDef usart1_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART1_RX_DMA_PRIORITY)}};
+             .Priority = USART1_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t usart1_rx_fifo = {.buf_size = USART1_RX_DMA_BUF_SIZE,
                                         .fifo_size = USART1_RX_DMA_FIFO_SIZE};
@@ -413,7 +412,7 @@ static DMA_HandleTypeDef usart1_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART1_TX_DMA_PRIORITY)}};
+             .Priority = USART1_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t usart1_tx_buf = {.buf_size = USART1_TX_DMA_BUF_SIZE};
 
@@ -424,15 +423,15 @@ static uart_tx_buf_t usart1_tx_buf = {.buf_size = USART1_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return USART1 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t usart1_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&usart1_handle) != RESET) {
+    if (HAL_UART_GetState(&usart1_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -445,7 +444,7 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART1_TX_PORT);
     gpio_init_struct.Pin = USART1_TX_PIN;
-    gpio_init_struct.Alternate = USART1_TX_AF;
+    gpio_init_struct.Alternate = USART1_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART1_TX_PORT), &gpio_init_struct);
 #endif /* USART1_TX */
 
@@ -454,7 +453,7 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART1_RX_PORT);
     gpio_init_struct.Pin = USART1_RX_PIN;
-    gpio_init_struct.Alternate = USART1_RX_AF;
+    gpio_init_struct.Alternate = USART1_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART1_RX_PORT), &gpio_init_struct);
 #endif /* USART1_RX */
 
@@ -463,7 +462,7 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART1_CTS_PORT);
     gpio_init_struct.Pin = USART1_CTS_PIN;
-    gpio_init_struct.Alternate = USART1_CTS_AF;
+    gpio_init_struct.Alternate = USART1_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART1_CTS_PORT), &gpio_init_struct);
 #endif /* USART1_USART1_CTS */
 
@@ -472,7 +471,7 @@ uint8_t usart1_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART1_RTS_PORT);
     gpio_init_struct.Pin = USART1_RTS_PIN;
-    gpio_init_struct.Alternate = USART1_RTS_AF;
+    gpio_init_struct.Alternate = USART1_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART1_RTS_PORT), &gpio_init_struct);
 #endif /* USART1_RTS */
 
@@ -600,13 +599,13 @@ void USART1_TX_DMA_IRQHandler(void) {
  * @brief USART1 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t usart1_deinit(void) {
-    if (HAL_UART_GetState(&usart1_handle) == RESET) {
+    if (HAL_UART_GetState(&usart1_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -703,7 +702,7 @@ static DMA_HandleTypeDef usart2_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART2_RX_DMA_PRIORITY)}};
+             .Priority = USART2_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t usart2_rx_fifo = {.buf_size = USART2_RX_DMA_BUF_SIZE,
                                         .fifo_size = USART2_RX_DMA_FIFO_SIZE};
@@ -721,7 +720,7 @@ static DMA_HandleTypeDef usart2_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART2_TX_DMA_PRIORITY)}};
+             .Priority = USART2_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t usart2_tx_buf = {.buf_size = USART2_TX_DMA_BUF_SIZE};
 
@@ -732,15 +731,15 @@ static uart_tx_buf_t usart2_tx_buf = {.buf_size = USART2_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return USART2 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t usart2_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&usart2_handle) != RESET) {
+    if (HAL_UART_GetState(&usart2_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -753,7 +752,7 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART2_TX_PORT);
     gpio_init_struct.Pin = USART2_TX_PIN;
-    gpio_init_struct.Alternate = USART2_TX_AF;
+    gpio_init_struct.Alternate = USART2_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART2_TX_PORT), &gpio_init_struct);
 #endif /* USART2_TX */
 
@@ -762,7 +761,7 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART2_RX_PORT);
     gpio_init_struct.Pin = USART2_RX_PIN;
-    gpio_init_struct.Alternate = USART2_RX_AF;
+    gpio_init_struct.Alternate = USART2_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART2_RX_PORT), &gpio_init_struct);
 #endif /* USART2_RX */
 
@@ -771,7 +770,7 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART2_CTS_PORT);
     gpio_init_struct.Pin = USART2_CTS_PIN;
-    gpio_init_struct.Alternate = USART2_CTS_AF;
+    gpio_init_struct.Alternate = USART2_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART2_CTS_PORT), &gpio_init_struct);
 #endif /* USART2_USART2_CTS */
 
@@ -780,7 +779,7 @@ uint8_t usart2_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART2_RTS_PORT);
     gpio_init_struct.Pin = USART2_RTS_PIN;
-    gpio_init_struct.Alternate = USART2_RTS_AF;
+    gpio_init_struct.Alternate = USART2_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART2_RTS_PORT), &gpio_init_struct);
 #endif /* USART2_RTS */
 
@@ -908,13 +907,13 @@ void USART2_TX_DMA_IRQHandler(void) {
  * @brief USART2 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t usart2_deinit(void) {
-    if (HAL_UART_GetState(&usart2_handle) == RESET) {
+    if (HAL_UART_GetState(&usart2_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -1011,7 +1010,7 @@ static DMA_HandleTypeDef usart3_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART3_RX_DMA_PRIORITY)}};
+             .Priority = USART3_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t usart3_rx_fifo = {.buf_size = USART3_RX_DMA_BUF_SIZE,
                                         .fifo_size = USART3_RX_DMA_FIFO_SIZE};
@@ -1029,7 +1028,7 @@ static DMA_HandleTypeDef usart3_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(USART3_TX_DMA_PRIORITY)}};
+             .Priority = USART3_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t usart3_tx_buf = {.buf_size = USART3_TX_DMA_BUF_SIZE};
 
@@ -1040,15 +1039,15 @@ static uart_tx_buf_t usart3_tx_buf = {.buf_size = USART3_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return USART3 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t usart3_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&usart3_handle) != RESET) {
+    if (HAL_UART_GetState(&usart3_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -1061,7 +1060,7 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART3_TX_PORT);
     gpio_init_struct.Pin = USART3_TX_PIN;
-    gpio_init_struct.Alternate = USART3_TX_AF;
+    gpio_init_struct.Alternate = USART3_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART3_TX_PORT), &gpio_init_struct);
 #endif /* USART3_TX */
 
@@ -1070,7 +1069,7 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART3_RX_PORT);
     gpio_init_struct.Pin = USART3_RX_PIN;
-    gpio_init_struct.Alternate = USART3_RX_AF;
+    gpio_init_struct.Alternate = USART3_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART3_RX_PORT), &gpio_init_struct);
 #endif /* USART3_RX */
 
@@ -1079,7 +1078,7 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART3_CTS_PORT);
     gpio_init_struct.Pin = USART3_CTS_PIN;
-    gpio_init_struct.Alternate = USART3_CTS_AF;
+    gpio_init_struct.Alternate = USART3_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART3_CTS_PORT), &gpio_init_struct);
 #endif /* USART3_USART3_CTS */
 
@@ -1088,7 +1087,7 @@ uint8_t usart3_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(USART3_RTS_PORT);
     gpio_init_struct.Pin = USART3_RTS_PIN;
-    gpio_init_struct.Alternate = USART3_RTS_AF;
+    gpio_init_struct.Alternate = USART3_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(USART3_RTS_PORT), &gpio_init_struct);
 #endif /* USART3_RTS */
 
@@ -1216,13 +1215,13 @@ void USART3_TX_DMA_IRQHandler(void) {
  * @brief USART3 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t usart3_deinit(void) {
-    if (HAL_UART_GetState(&usart3_handle) == RESET) {
+    if (HAL_UART_GetState(&usart3_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -1319,7 +1318,7 @@ static DMA_HandleTypeDef uart4_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(UART4_RX_DMA_PRIORITY)}};
+             .Priority = UART4_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t uart4_rx_fifo = {.buf_size = UART4_RX_DMA_BUF_SIZE,
                                         .fifo_size = UART4_RX_DMA_FIFO_SIZE};
@@ -1337,7 +1336,7 @@ static DMA_HandleTypeDef uart4_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(UART4_TX_DMA_PRIORITY)}};
+             .Priority = UART4_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t uart4_tx_buf = {.buf_size = UART4_TX_DMA_BUF_SIZE};
 
@@ -1348,15 +1347,15 @@ static uart_tx_buf_t uart4_tx_buf = {.buf_size = UART4_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return UART4 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t uart4_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&uart4_handle) != RESET) {
+    if (HAL_UART_GetState(&uart4_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -1369,7 +1368,7 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART4_TX_PORT);
     gpio_init_struct.Pin = UART4_TX_PIN;
-    gpio_init_struct.Alternate = UART4_TX_AF;
+    gpio_init_struct.Alternate = UART4_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART4_TX_PORT), &gpio_init_struct);
 #endif /* UART4_TX */
 
@@ -1378,7 +1377,7 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART4_RX_PORT);
     gpio_init_struct.Pin = UART4_RX_PIN;
-    gpio_init_struct.Alternate = UART4_RX_AF;
+    gpio_init_struct.Alternate = UART4_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART4_RX_PORT), &gpio_init_struct);
 #endif /* UART4_RX */
 
@@ -1387,7 +1386,7 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART4_CTS_PORT);
     gpio_init_struct.Pin = UART4_CTS_PIN;
-    gpio_init_struct.Alternate = UART4_CTS_AF;
+    gpio_init_struct.Alternate = UART4_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART4_CTS_PORT), &gpio_init_struct);
 #endif /* UART4_UART4_CTS */
 
@@ -1396,7 +1395,7 @@ uint8_t uart4_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART4_RTS_PORT);
     gpio_init_struct.Pin = UART4_RTS_PIN;
-    gpio_init_struct.Alternate = UART4_RTS_AF;
+    gpio_init_struct.Alternate = UART4_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART4_RTS_PORT), &gpio_init_struct);
 #endif /* UART4_RTS */
 
@@ -1524,13 +1523,13 @@ void UART4_TX_DMA_IRQHandler(void) {
  * @brief UART4 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t uart4_deinit(void) {
-    if (HAL_UART_GetState(&uart4_handle) == RESET) {
+    if (HAL_UART_GetState(&uart4_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -1627,7 +1626,7 @@ static DMA_HandleTypeDef uart5_dmarx_handle = {
              .Mode = DMA_CIRCULAR,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(UART5_RX_DMA_PRIORITY)}};
+             .Priority = UART5_RX_DMA_PRIORITY}};
 
 static uart_rx_fifo_t uart5_rx_fifo = {.buf_size = UART5_RX_DMA_BUF_SIZE,
                                         .fifo_size = UART5_RX_DMA_FIFO_SIZE};
@@ -1645,7 +1644,7 @@ static DMA_HandleTypeDef uart5_dmatx_handle = {
              .Mode = DMA_NORMAL,
              .PeriphDataAlignment = DMA_PDATAALIGN_BYTE,
              .PeriphInc = DMA_PINC_DISABLE,
-             .Priority = CSP_DMA_PRIORITY(UART5_TX_DMA_PRIORITY)}};
+             .Priority = UART5_TX_DMA_PRIORITY}};
 
 static uart_tx_buf_t uart5_tx_buf = {.buf_size = UART5_TX_DMA_BUF_SIZE};
 
@@ -1656,15 +1655,15 @@ static uart_tx_buf_t uart5_tx_buf = {.buf_size = UART5_TX_DMA_BUF_SIZE};
  *
  * @param baud_rate Baud rate.
  * @return UART5 init status.
- * @retval - 0: `UART_INIT_OK`:       Success.
- * @retval - 1: `UART_INIT_FAIL`:     UART init failed.
- * @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
- * @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
+ *  @retval - 0: `UART_INIT_OK`:       Success.
+ *  @retval - 1: `UART_INIT_FAIL`:     UART init failed.
+ *  @retval - 2: `UART_INIT_DMA_FAIL`: UART DMA init failed.
+ *  @retval - 3: `UART_INIT_MEM_FAIL`: UART buffer memory init failed (It will
  *                                    dynamic allocate memory when using DMA).
- * @retval - 4: `UART_INITED`:        This uart is inited.
+ *  @retval - 4: `UART_INITED`:        This uart is inited.
  */
 uint8_t uart5_init(uint32_t baud_rate) {
-    if (HAL_UART_GetState(&uart5_handle) != RESET) {
+    if (HAL_UART_GetState(&uart5_handle) != HAL_UART_STATE_RESET) {
         return UART_INITED;
     }
 
@@ -1677,7 +1676,7 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART5_TX_PORT);
     gpio_init_struct.Pin = UART5_TX_PIN;
-    gpio_init_struct.Alternate = UART5_TX_AF;
+    gpio_init_struct.Alternate = UART5_TX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART5_TX_PORT), &gpio_init_struct);
 #endif /* UART5_TX */
 
@@ -1686,7 +1685,7 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART5_RX_PORT);
     gpio_init_struct.Pin = UART5_RX_PIN;
-    gpio_init_struct.Alternate = UART5_RX_AF;
+    gpio_init_struct.Alternate = UART5_RX_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART5_RX_PORT), &gpio_init_struct);
 #endif /* UART5_RX */
 
@@ -1695,7 +1694,7 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART5_CTS_PORT);
     gpio_init_struct.Pin = UART5_CTS_PIN;
-    gpio_init_struct.Alternate = UART5_CTS_AF;
+    gpio_init_struct.Alternate = UART5_CTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART5_CTS_PORT), &gpio_init_struct);
 #endif /* UART5_UART5_CTS */
 
@@ -1704,7 +1703,7 @@ uint8_t uart5_init(uint32_t baud_rate) {
 
     CSP_GPIO_CLK_ENABLE(UART5_RTS_PORT);
     gpio_init_struct.Pin = UART5_RTS_PIN;
-    gpio_init_struct.Alternate = UART5_RTS_AF;
+    gpio_init_struct.Alternate = UART5_RTS_GPIO_AF;
     HAL_GPIO_Init(CSP_GPIO_PORT(UART5_RTS_PORT), &gpio_init_struct);
 #endif /* UART5_RTS */
 
@@ -1832,13 +1831,13 @@ void UART5_TX_DMA_IRQHandler(void) {
  * @brief UART5 deinitialization.
  *
  * @return UART deinit status.
- * @retval - 0: `UART_DEINIT_OK`:       Success.
- * @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
- * @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
- * @retval - 3: `UART_NO_INIT`:         UART is not init.
+ *  @retval - 0: `UART_DEINIT_OK`:       Success.
+ *  @retval - 1: `UART_DEINIT_FAIL`:     UART deinit failed.
+ *  @retval - 2: `UART_DEINIT_DMA_FAIL`: UART DMA deinit failed.
+ *  @retval - 3: `UART_NO_INIT`:         UART is not init.
  */
 uint8_t uart5_deinit(void) {
-    if (HAL_UART_GetState(&uart5_handle) == RESET) {
+    if (HAL_UART_GetState(&uart5_handle) == HAL_UART_STATE_RESET) {
         return UART_NO_INIT;
     }
 
@@ -1925,8 +1924,7 @@ uint8_t uart5_deinit(void) {
  *         array, not counting the terminating null character.
  */
 int uart_printf(UART_HandleTypeDef *huart, const char *__format, ...) {
-    int res;
-    uint16_t len;
+    int len;
     va_list ap;
 
     if (((huart->gState) & HAL_UART_STATE_READY) == 0) {
@@ -1939,10 +1937,8 @@ int uart_printf(UART_HandleTypeDef *huart, const char *__format, ...) {
         ;
 
     va_start(ap, __format);
-    res = vsnprintf(uart_buffer, sizeof(uart_buffer), __format, ap);
+    len = vsnprintf(uart_buffer, sizeof(uart_buffer), __format, ap);
     va_end(ap);
-
-    len = strlen(uart_buffer);
 
     if (huart->hdmatx != NULL) {
         HAL_UART_Transmit_DMA(huart, (uint8_t *)uart_buffer, len);
@@ -1950,7 +1946,7 @@ int uart_printf(UART_HandleTypeDef *huart, const char *__format, ...) {
         HAL_UART_Transmit(huart, (uint8_t *)uart_buffer, len, 1000);
     }
 
-    return res;
+    return len;
 }
 
 /**
@@ -2185,10 +2181,10 @@ uint32_t uart_dmarx_read(UART_HandleTypeDef *huart, void *buf,
  * @param buf_size New buf size
  * @param fifo_size New fifo size
  * @return Resize message:
- * @retval - 0: Success
- * @retval - 1: This uart not enable DMA Rx.
- * @retval - 2: This UART is enabled.
- * @retval - 3: Parameter Error, size can't be 0.
+ *  @retval - 0: Success
+ *  @retval - 1: This uart not enable DMA Rx.
+ *  @retval - 2: This UART is enabled.
+ *  @retval - 3: Parameter Error, size can't be 0.
  * @warning Must be disabled the UART before resize!
  *          You should call `u(s)artx_deinit()` before call this function,
  *          than call `u(s)artx_init()` to using new size.
@@ -2376,11 +2372,11 @@ uint32_t uart_dmatx_send(UART_HandleTypeDef *huart) {
  * @param huart The handle of UART
  * @param size New size
  * @return Resize message:
- * @retval - 0: Success
- * @retval - 1: This uart not enable DMA Tx.
- * @retval - 2: No free memory to allocate.
- * @retval - 3: This uart is busy now.
- * @retval - 4: Parameter error, size can't be 0.
+ *  @retval - 0: Success
+ *  @retval - 1: This uart not enable DMA Tx.
+ *  @retval - 2: No free memory to allocate.
+ *  @retval - 3: This uart is busy now.
+ *  @retval - 4: Parameter error, size can't be 0.
  */
 uint8_t uart_dmatx_resize_buf(UART_HandleTypeDef *huart, uint32_t size) {
     if (size == 0) {

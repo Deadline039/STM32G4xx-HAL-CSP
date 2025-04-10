@@ -1,10 +1,9 @@
-
 /**
  * @file    I2C_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of I2C on STM32G4xx
- * @version 1.0
- * @date    2025-02-05
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    Generate Automatically.
  */
 
@@ -42,32 +41,32 @@ extern "C" {
 #if I2C1_ENABLE
 
 #if (I2C1_SCL_ID == 0)
-#  define I2C1_SCL_AF GPIO_AF4_I2C1
-#  if (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx))
-#    error "PA13 can not be configured as I2C1 SCL on STM32G471xx, STM32G473xx, STM32G483xx! "
-#  endif  /* (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx)) */
+#  define I2C1_SCL_GPIO_AF GPIO_AF4_I2C1
+#  if (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx))
+#    error "PA13 can not be configured as I2C1 SCL on STM32G483xx, STM32G471xx, STM32G473xx! "
+#  endif  /* (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx)) */
 #elif (I2C1_SCL_ID == 1)
-#  define I2C1_SCL_AF GPIO_AF4_I2C1
+#  define I2C1_SCL_GPIO_AF GPIO_AF4_I2C1
 #elif (I2C1_SCL_ID == 2)
-#  define I2C1_SCL_AF GPIO_AF4_I2C1
+#  define I2C1_SCL_GPIO_AF GPIO_AF4_I2C1
 #elif (I2C1_SCL_ID == 3)
-#  define I2C1_SCL_AF GPIO_AF4_I2C1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PB6 can not be configured as I2C1 SCL on STM32G431xx, STM32G441xx, STM32G474xx, STM32G484xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C1_SCL_GPIO_AF GPIO_AF4_I2C1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PB6 can not be configured as I2C1 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* I2C1_SCL_ID */
 
 #if (I2C1_SDA_ID == 0)
-#  define I2C1_SDA_AF GPIO_AF4_I2C1
+#  define I2C1_SDA_GPIO_AF GPIO_AF4_I2C1
 #elif (I2C1_SDA_ID == 1)
-#  define I2C1_SDA_AF GPIO_AF4_I2C1
+#  define I2C1_SDA_GPIO_AF GPIO_AF4_I2C1
 #elif (I2C1_SDA_ID == 2)
-#  define I2C1_SDA_AF GPIO_AF4_I2C1
+#  define I2C1_SDA_GPIO_AF GPIO_AF4_I2C1
 #endif  /* I2C1_SDA_ID */
 
 extern I2C_HandleTypeDef i2c1_handle;
 
-uint8_t i2c1_init(uint32_t timing, uint32_t address,
+uint8_t i2c1_init(uint32_t clock_speed, uint32_t address,
                   uint32_t address_mode);
 uint8_t i2c1_deinit(void); 
 
@@ -99,36 +98,36 @@ uint8_t i2c1_deinit(void);
 #if I2C2_ENABLE
 
 #if (I2C2_SCL_ID == 0)
-#  define I2C2_SCL_AF GPIO_AF4_I2C2
+#  define I2C2_SCL_GPIO_AF GPIO_AF4_I2C2
 #elif (I2C2_SCL_ID == 1)
-#  define I2C2_SCL_AF GPIO_AF4_I2C2
+#  define I2C2_SCL_GPIO_AF GPIO_AF4_I2C2
 #  if (defined(STM32GBK1CB))
 #    error "PC4 can not be configured as I2C2 SCL on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (I2C2_SCL_ID == 2)
-#  define I2C2_SCL_AF GPIO_AF4_I2C2
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF6 can not be configured as I2C2 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C2_SCL_GPIO_AF GPIO_AF4_I2C2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF6 can not be configured as I2C2 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* I2C2_SCL_ID */
 
 #if (I2C2_SDA_ID == 0)
-#  define I2C2_SDA_AF GPIO_AF4_I2C2
-#  if (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx))
-#    error "PA8 can not be configured as I2C2 SDA on STM32G471xx, STM32G473xx, STM32G483xx! "
-#  endif  /* (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx)) */
+#  define I2C2_SDA_GPIO_AF GPIO_AF4_I2C2
+#  if (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx))
+#    error "PA8 can not be configured as I2C2 SDA on STM32G483xx, STM32G471xx, STM32G473xx! "
+#  endif  /* (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx)) */
 #elif (I2C2_SDA_ID == 1)
-#  define I2C2_SDA_AF GPIO_AF4_I2C2
+#  define I2C2_SDA_GPIO_AF GPIO_AF4_I2C2
 #elif (I2C2_SDA_ID == 2)
-#  define I2C2_SDA_AF GPIO_AF4_I2C2
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PA10 can not be configured as I2C2 SDA on STM32G431xx, STM32G441xx, STM32G474xx, STM32G484xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C2_SDA_GPIO_AF GPIO_AF4_I2C2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PA10 can not be configured as I2C2 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* I2C2_SDA_ID */
 
 extern I2C_HandleTypeDef i2c2_handle;
 
-uint8_t i2c2_init(uint32_t timing, uint32_t address,
+uint8_t i2c2_init(uint32_t clock_speed, uint32_t address,
                   uint32_t address_mode);
 uint8_t i2c2_deinit(void); 
 
@@ -160,59 +159,59 @@ uint8_t i2c2_deinit(void);
 #if I2C3_ENABLE
 
 #if (I2C3_SCL_ID == 0)
-#  define I2C3_SCL_AF GPIO_AF2_I2C3
-#  if (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx))
-#    error "PA8 can not be configured as I2C3 SCL on STM32G471xx, STM32G473xx, STM32G483xx! "
-#  endif  /* (defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx)) */
+#  define I2C3_SCL_GPIO_AF GPIO_AF2_I2C3
+#  if (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx))
+#    error "PA8 can not be configured as I2C3 SCL on STM32G483xx, STM32G471xx, STM32G473xx! "
+#  endif  /* (defined(STM32G483xx) || defined(STM32G471xx) || defined(STM32G473xx)) */
 #elif (I2C3_SCL_ID == 1)
-#  define I2C3_SCL_AF GPIO_AF8_I2C3
+#  define I2C3_SCL_GPIO_AF GPIO_AF8_I2C3
 #  if (defined(STM32GBK1CB))
 #    error "PC8 can not be configured as I2C3 SCL on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (I2C3_SCL_ID == 2)
-#  define I2C3_SCL_AF GPIO_AF2_I2C3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PA10 can not be configured as I2C3 SCL on STM32G431xx, STM32G441xx, STM32G474xx, STM32G484xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C3_SCL_GPIO_AF GPIO_AF2_I2C3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PA10 can not be configured as I2C3 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #elif (I2C3_SCL_ID == 3)
-#  define I2C3_SCL_AF GPIO_AF4_I2C3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF3 can not be configured as I2C3 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C3_SCL_GPIO_AF GPIO_AF4_I2C3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF3 can not be configured as I2C3 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C3_SCL_ID == 4)
-#  define I2C3_SCL_AF GPIO_AF4_I2C3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG7 can not be configured as I2C3 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C3_SCL_GPIO_AF GPIO_AF4_I2C3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG7 can not be configured as I2C3 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* I2C3_SCL_ID */
 
 #if (I2C3_SDA_ID == 0)
-#  define I2C3_SDA_AF GPIO_AF8_I2C3
+#  define I2C3_SDA_GPIO_AF GPIO_AF8_I2C3
 #elif (I2C3_SDA_ID == 1)
-#  define I2C3_SDA_AF GPIO_AF8_I2C3
+#  define I2C3_SDA_GPIO_AF GPIO_AF8_I2C3
 #  if (defined(STM32GBK1CB))
 #    error "PC9 can not be configured as I2C3 SDA on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (I2C3_SDA_ID == 2)
-#  define I2C3_SDA_AF GPIO_AF8_I2C3
+#  define I2C3_SDA_GPIO_AF GPIO_AF8_I2C3
 #  if (defined(STM32GBK1CB))
 #    error "PC11 can not be configured as I2C3 SDA on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (I2C3_SDA_ID == 3)
-#  define I2C3_SDA_AF GPIO_AF4_I2C3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF4 can not be configured as I2C3 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C3_SDA_GPIO_AF GPIO_AF4_I2C3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF4 can not be configured as I2C3 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C3_SDA_ID == 4)
-#  define I2C3_SDA_AF GPIO_AF4_I2C3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG8 can not be configured as I2C3 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C3_SDA_GPIO_AF GPIO_AF4_I2C3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG8 can not be configured as I2C3 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* I2C3_SDA_ID */
 
 extern I2C_HandleTypeDef i2c3_handle;
 
-uint8_t i2c3_init(uint32_t timing, uint32_t address,
+uint8_t i2c3_init(uint32_t clock_speed, uint32_t address,
                   uint32_t address_mode);
 uint8_t i2c3_deinit(void); 
 
@@ -244,57 +243,57 @@ uint8_t i2c3_deinit(void);
 #if I2C4_ENABLE
 
 #if (I2C4_SCL_ID == 0)
-#  define I2C4_SCL_AF GPIO_AF3_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PB6 can not be configured as I2C4 SCL on STM32G431xx, STM32G441xx, STM32G474xx, STM32G484xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SCL_GPIO_AF GPIO_AF3_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PB6 can not be configured as I2C4 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #elif (I2C4_SCL_ID == 1)
-#  define I2C4_SCL_AF GPIO_AF8_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PC6 can not be configured as I2C4 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SCL_GPIO_AF GPIO_AF8_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PC6 can not be configured as I2C4 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SCL_ID == 2)
-#  define I2C4_SCL_AF GPIO_AF4_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF14 can not be configured as I2C4 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SCL_GPIO_AF GPIO_AF4_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF14 can not be configured as I2C4 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SCL_ID == 3)
-#  define I2C4_SCL_AF GPIO_AF4_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG3 can not be configured as I2C4 SCL on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SCL_GPIO_AF GPIO_AF4_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG3 can not be configured as I2C4 SCL on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SCL_ID == 4)
-#  define I2C4_SCL_AF GPIO_AF3_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PA13 can not be configured as I2C4 SCL on STM32G431xx, STM32G441xx, STM32G471xx, STM32G473xx, STM32G483xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G483xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SCL_GPIO_AF GPIO_AF3_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G483xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G441xx))
+#    error "PA13 can not be configured as I2C4 SCL on STM32G491xx, STM32G483xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G471xx, STM32G473xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G483xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G473xx) || defined(STM32G441xx)) */
 #endif  /* I2C4_SCL_ID */
 
 #if (I2C4_SDA_ID == 0)
-#  define I2C4_SDA_AF GPIO_AF3_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PB7 can not be configured as I2C4 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SDA_GPIO_AF GPIO_AF3_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PB7 can not be configured as I2C4 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SDA_ID == 1)
-#  define I2C4_SDA_AF GPIO_AF8_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PC7 can not be configured as I2C4 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SDA_GPIO_AF GPIO_AF8_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PC7 can not be configured as I2C4 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SDA_ID == 2)
-#  define I2C4_SDA_AF GPIO_AF4_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF15 can not be configured as I2C4 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SDA_GPIO_AF GPIO_AF4_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF15 can not be configured as I2C4 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #elif (I2C4_SDA_ID == 3)
-#  define I2C4_SDA_AF GPIO_AF4_I2C4
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG4 can not be configured as I2C4 SDA on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define I2C4_SDA_GPIO_AF GPIO_AF4_I2C4
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG4 can not be configured as I2C4 SDA on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* I2C4_SDA_ID */
 
 extern I2C_HandleTypeDef i2c4_handle;
 
-uint8_t i2c4_init(uint32_t timing, uint32_t address,
+uint8_t i2c4_init(uint32_t clock_speed, uint32_t address,
                   uint32_t address_mode);
 uint8_t i2c4_deinit(void); 
 

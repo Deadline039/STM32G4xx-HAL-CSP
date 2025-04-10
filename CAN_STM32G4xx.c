@@ -1,10 +1,9 @@
-
 /**
  * @file    CAN_STM32G4xx.c
  * @author  Deadline039
  * @brief   Chip Support Package of FDCAN on STM32G4xx
- * @version 1.0
- * @date    2025-02-05
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    We will support FDCAN in the feature.
  *          Generate Automatically. 
  */
@@ -40,14 +39,14 @@ FDCAN_HandleTypeDef fdcan1_handle = {
  * @param prop_delay The propagation delay of bus, include cable and can
  *                   transceiver. Unit: ns.
  * @return CAN init status.
- * @retval - 0: `CAN_INIT_OK`:           Success.
- * @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
+ *  @retval - 0: `CAN_INIT_OK`:           Success.
+ *  @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
  *                                       condition.
- * @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
- * @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
- * @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
- * @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
- * @retval - 6: `CAN_INITED`:            This can is inited.
+ *  @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
+ *  @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
+ *  @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
+ *  @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
+ *  @retval - 6: `CAN_INITED`:            This can is inited.
  * @attention Only support CAN Classic, we will support FDCAN in the feature.'
  */
 uint8_t fdcan1_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
@@ -56,7 +55,8 @@ uint8_t fdcan1_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
     }
 
     uint32_t prescale, tbs1, tbs2, tsjw;
-    if (can_rate_calc(baud_rate * 1000, prop_delay, HAL_RCC_GetPCLK1Freq(),
+    uint32_t fdcan_clock_freq = HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_FDCAN);
+    if (can_rate_calc(baud_rate * 1000, prop_delay, fdcan_clock_freq,
                       &prescale, &tsjw, &tbs1, &tbs2) == 1) {
         return CAN_INIT_RATE_ERR;
     }
@@ -132,13 +132,15 @@ void FDCAN1_IT1_IRQHandler(void) {
     HAL_FDCAN_IRQHandler(&fdcan1_handle);
 }
 
+#endif /* FDCAN1_IT1_IT_ENABLE */
+
 /**
  * @brief FDCAN1 deinitialization.
  *
  * @return Deinit status.
- * @retval - 0: `CAN_DEINIT_OK`:   Success.
- * @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
- * @retval - 2: `CAN_NO_INIT`:     This can is no init.
+ *  @retval - 0: `CAN_DEINIT_OK`:   Success.
+ *  @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
+ *  @retval - 2: `CAN_NO_INIT`:     This can is no init.
  */
 uint8_t fdcan1_deinit(void) {
     if (HAL_FDCAN_GetState(&fdcan1_handle) == HAL_FDCAN_STATE_RESET) {
@@ -155,8 +157,6 @@ uint8_t fdcan1_deinit(void) {
 
     return CAN_DEINIT_OK;
 }
-
-#endif /* FDCAN1_IT1_IT_ENABLE */
 
 #endif /* FDCAN1_ENABLE */
 
@@ -189,14 +189,14 @@ FDCAN_HandleTypeDef fdcan2_handle = {
  * @param prop_delay The propagation delay of bus, include cable and can
  *                   transceiver. Unit: ns.
  * @return CAN init status.
- * @retval - 0: `CAN_INIT_OK`:           Success.
- * @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
+ *  @retval - 0: `CAN_INIT_OK`:           Success.
+ *  @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
  *                                       condition.
- * @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
- * @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
- * @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
- * @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
- * @retval - 6: `CAN_INITED`:            This can is inited.
+ *  @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
+ *  @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
+ *  @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
+ *  @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
+ *  @retval - 6: `CAN_INITED`:            This can is inited.
  * @attention Only support CAN Classic, we will support FDCAN in the feature.'
  */
 uint8_t fdcan2_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
@@ -205,7 +205,8 @@ uint8_t fdcan2_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
     }
 
     uint32_t prescale, tbs1, tbs2, tsjw;
-    if (can_rate_calc(baud_rate * 1000, prop_delay, HAL_RCC_GetPCLK1Freq(),
+    uint32_t fdcan_clock_freq = HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_FDCAN);
+    if (can_rate_calc(baud_rate * 1000, prop_delay, fdcan_clock_freq,
                       &prescale, &tsjw, &tbs1, &tbs2) == 1) {
         return CAN_INIT_RATE_ERR;
     }
@@ -281,13 +282,15 @@ void FDCAN2_IT1_IRQHandler(void) {
     HAL_FDCAN_IRQHandler(&fdcan2_handle);
 }
 
+#endif /* FDCAN2_IT1_IT_ENABLE */
+
 /**
  * @brief FDCAN2 deinitialization.
  *
  * @return Deinit status.
- * @retval - 0: `CAN_DEINIT_OK`:   Success.
- * @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
- * @retval - 2: `CAN_NO_INIT`:     This can is no init.
+ *  @retval - 0: `CAN_DEINIT_OK`:   Success.
+ *  @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
+ *  @retval - 2: `CAN_NO_INIT`:     This can is no init.
  */
 uint8_t fdcan2_deinit(void) {
     if (HAL_FDCAN_GetState(&fdcan2_handle) == HAL_FDCAN_STATE_RESET) {
@@ -304,8 +307,6 @@ uint8_t fdcan2_deinit(void) {
 
     return CAN_DEINIT_OK;
 }
-
-#endif /* FDCAN2_IT1_IT_ENABLE */
 
 #endif /* FDCAN2_ENABLE */
 
@@ -338,14 +339,14 @@ FDCAN_HandleTypeDef fdcan3_handle = {
  * @param prop_delay The propagation delay of bus, include cable and can
  *                   transceiver. Unit: ns.
  * @return CAN init status.
- * @retval - 0: `CAN_INIT_OK`:           Success.
- * @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
+ *  @retval - 0: `CAN_INIT_OK`:           Success.
+ *  @retval - 1: `CAN_INIT_RATE_ERR`:     Can not satisfied this baudrate in this
  *                                       condition.
- * @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
- * @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
- * @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
- * @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
- * @retval - 6: `CAN_INITED`:            This can is inited.
+ *  @retval - 2: `CAN_INIT_FILTER_FAIL`:  CAN Filter init failed.
+ *  @retval - 3: `CAN_INIT_FAIL`:         CAN hardware init failed.
+ *  @retval - 4: `CAN_INIT_START_FAIL`:   CAN start failed.
+ *  @retval - 5: `CAN_INIT_NOTIFY_FAIL`:  Enable CAN receive notify failed.
+ *  @retval - 6: `CAN_INITED`:            This can is inited.
  * @attention Only support CAN Classic, we will support FDCAN in the feature.'
  */
 uint8_t fdcan3_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
@@ -354,7 +355,8 @@ uint8_t fdcan3_init(uint32_t baud_rate, uint32_t fd_mode, uint32_t prop_delay) {
     }
 
     uint32_t prescale, tbs1, tbs2, tsjw;
-    if (can_rate_calc(baud_rate * 1000, prop_delay, HAL_RCC_GetPCLK1Freq(),
+    uint32_t fdcan_clock_freq = HAL_RCCEx_GetPeriphCLKFreq(RCC_PERIPHCLK_FDCAN);
+    if (can_rate_calc(baud_rate * 1000, prop_delay, fdcan_clock_freq,
                       &prescale, &tsjw, &tbs1, &tbs2) == 1) {
         return CAN_INIT_RATE_ERR;
     }
@@ -430,13 +432,15 @@ void FDCAN3_IT1_IRQHandler(void) {
     HAL_FDCAN_IRQHandler(&fdcan3_handle);
 }
 
+#endif /* FDCAN3_IT1_IT_ENABLE */
+
 /**
  * @brief FDCAN3 deinitialization.
  *
  * @return Deinit status.
- * @retval - 0: `CAN_DEINIT_OK`:   Success.
- * @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
- * @retval - 2: `CAN_NO_INIT`:     This can is no init.
+ *  @retval - 0: `CAN_DEINIT_OK`:   Success.
+ *  @retval - 1: `CAN_DEINIT_FAIL`: CAN hardware deinit failed.
+ *  @retval - 2: `CAN_NO_INIT`:     This can is no init.
  */
 uint8_t fdcan3_deinit(void) {
     if (HAL_FDCAN_GetState(&fdcan3_handle) == HAL_FDCAN_STATE_RESET) {
@@ -454,8 +458,6 @@ uint8_t fdcan3_deinit(void) {
     return CAN_DEINIT_OK;
 }
 
-#endif /* FDCAN3_IT1_IT_ENABLE */
-
 #endif /* FDCAN3_ENABLE */
 
 /**
@@ -463,7 +465,7 @@ uint8_t fdcan3_deinit(void) {
  */
 
 /*****************************************************************************
- * @defgroup Public functions of CAN.
+ * @defgroup Public functions of FDCAN.
  * @{
  */
 
@@ -478,14 +480,9 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
     GPIO_InitTypeDef gpio_init_struct = {.Mode = GPIO_MODE_AF_PP,
                                          .Pull = GPIO_PULLUP,
                                          .Speed = GPIO_SPEED_FREQ_VERY_HIGH};
-    RCC_PeriphCLKInitTypeDef periph_clk_init = {0};
 
 #if FDCAN1_ENABLE
     if (hfdcan->Instance == FDCAN1) {
-        periph_clk_init.PeriphClockSelection = RCC_PERIPHCLK_FDCAN;
-        periph_clk_init.FdcanClockSelection = RCC_FDCANCLKSOURCE_PCLK1;
-        HAL_RCCEx_PeriphCLKConfig(&periph_clk_init);
-
         ++fdcan_clk_enabled;
         if (fdcan_clk_enabled == 1) {
             __HAL_RCC_FDCAN_CLK_ENABLE();
@@ -493,12 +490,12 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
 
         CSP_GPIO_CLK_ENABLE(FDCAN1_TX_PORT);
         gpio_init_struct.Pin = FDCAN1_TX_PIN;
-        gpio_init_struct.Alternate = FDCAN1_TX_AF;
+        gpio_init_struct.Alternate = FDCAN1_TX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN1_TX_PORT), &gpio_init_struct);
 
         CSP_GPIO_CLK_ENABLE(FDCAN1_RX_PORT);
         gpio_init_struct.Pin = FDCAN1_RX_PIN;
-        gpio_init_struct.Alternate = FDCAN1_RX_AF;
+        gpio_init_struct.Alternate = FDCAN1_RX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN1_RX_PORT), &gpio_init_struct);
 
 #if FDCAN1_IT0_IT_ENABLE
@@ -517,10 +514,6 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
 
 #if FDCAN2_ENABLE
     if (hfdcan->Instance == FDCAN2) {
-        periph_clk_init.PeriphClockSelection = RCC_PERIPHCLK_FDCAN;
-        periph_clk_init.FdcanClockSelection = RCC_FDCANCLKSOURCE_PCLK1;
-        HAL_RCCEx_PeriphCLKConfig(&periph_clk_init);
-
         ++fdcan_clk_enabled;
         if (fdcan_clk_enabled == 1) {
             __HAL_RCC_FDCAN_CLK_ENABLE();
@@ -528,12 +521,12 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
 
         CSP_GPIO_CLK_ENABLE(FDCAN2_TX_PORT);
         gpio_init_struct.Pin = FDCAN2_TX_PIN;
-        gpio_init_struct.Alternate = FDCAN2_TX_AF;
+        gpio_init_struct.Alternate = FDCAN2_TX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN2_TX_PORT), &gpio_init_struct);
 
         CSP_GPIO_CLK_ENABLE(FDCAN2_RX_PORT);
         gpio_init_struct.Pin = FDCAN2_RX_PIN;
-        gpio_init_struct.Alternate = FDCAN2_RX_AF;
+        gpio_init_struct.Alternate = FDCAN2_RX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN2_RX_PORT), &gpio_init_struct);
 
 #if FDCAN2_IT0_IT_ENABLE
@@ -552,10 +545,6 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
 
 #if FDCAN3_ENABLE
     if (hfdcan->Instance == FDCAN3) {
-        periph_clk_init.PeriphClockSelection = RCC_PERIPHCLK_FDCAN;
-        periph_clk_init.FdcanClockSelection = RCC_FDCANCLKSOURCE_PCLK1;
-        HAL_RCCEx_PeriphCLKConfig(&periph_clk_init);
-
         ++fdcan_clk_enabled;
         if (fdcan_clk_enabled == 1) {
             __HAL_RCC_FDCAN_CLK_ENABLE();
@@ -563,12 +552,12 @@ void HAL_FDCAN_MspInit(FDCAN_HandleTypeDef *hfdcan) {
 
         CSP_GPIO_CLK_ENABLE(FDCAN3_TX_PORT);
         gpio_init_struct.Pin = FDCAN3_TX_PIN;
-        gpio_init_struct.Alternate = FDCAN3_TX_AF;
+        gpio_init_struct.Alternate = FDCAN3_TX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN3_TX_PORT), &gpio_init_struct);
 
         CSP_GPIO_CLK_ENABLE(FDCAN3_RX_PORT);
         gpio_init_struct.Pin = FDCAN3_RX_PIN;
-        gpio_init_struct.Alternate = FDCAN3_RX_AF;
+        gpio_init_struct.Alternate = FDCAN3_RX_GPIO_AF;
         HAL_GPIO_Init(CSP_GPIO_PORT(FDCAN3_RX_PORT), &gpio_init_struct);
 
 #if FDCAN3_IT0_IT_ENABLE
@@ -657,7 +646,7 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef *hfdcan) {
 }
 
 /**
- * @brief Calcuate parameters of specific CAN Classic baudrate.
+ * @brief Calculate parameters of specific CAN Classic baudrate.
  *
  * @param[in] baud_rate CAN band rate. Unit: bps.
  * @param[in] prop_delay The propagation delay of bus, include cable and can
@@ -667,9 +656,9 @@ void HAL_FDCAN_MspDeInit(FDCAN_HandleTypeDef *hfdcan) {
  * @param[out] tsjw Syncronisation Jump Width
  * @param[out] tseg1 Time of segment 1.
  * @param[out] tseg2 Time of segment 2.
- * @return Calcuate status.
- * @retval - 0: No error;
- * @retval - 1: Can not satisfied this baudrate in this condition.
+ * @return Calculate status.
+ *  @retval - 0: No error;
+ *  @retval - 1: Can not satisfied this baudrate in this condition.
  * @note Only support CAN classic, we will support FDCAN in the feature.
  */
 uint8_t can_rate_calc(uint32_t baud_rate, uint32_t prop_delay,
@@ -793,11 +782,11 @@ FDCAN_HandleTypeDef *fdcan_get_handle(can_selected_t can_selected) {
  * @param len Specific message length.
  * @param msg Specific message content.
  * @return Send status.
- * @retval - 0: Success.
- * @retval - 1: Send error.
- * @retval - 2: Timeout.
- * @retval - 3: Parameter invalid.
- * @retval - 4: This CAN is not initialized.
+ *  @retval - 0: Success.
+ *  @retval - 1: Send error.
+ *  @retval - 2: Timeout.
+ *  @retval - 3: Parameter invalid.
+ *  @retval - 4: This CAN is not initialized.
  */
 uint8_t fdcan_send_message(can_selected_t can_selected, uint32_t can_ide,
                            uint32_t id, uint8_t len, const uint8_t *msg) {
@@ -885,11 +874,11 @@ uint8_t fdcan_send_message(can_selected_t can_selected, uint32_t can_ide,
  * @param len Specific message length.
  * @param msg Specific message content.
  * @return Send status.
- * @retval - 0: Success.
- * @retval - 1: Send error.
- * @retval - 2: Timeout.
- * @retval - 3: Parameter invalid.
- * @retval - 4: This CAN is not initialized.
+ *  @retval - 0: Success.
+ *  @retval - 1: Send error.
+ *  @retval - 2: Timeout.
+ *  @retval - 3: Parameter invalid.
+ *  @retval - 4: This CAN is not initialized.
  */
 uint8_t fdcan_send_remote(can_selected_t can_selected, uint32_t can_ide,
                           uint32_t id, uint8_t len, const uint8_t *msg) {

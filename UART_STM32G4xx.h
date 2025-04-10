@@ -1,10 +1,9 @@
-
 /**
  * @file    UART_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
- * @version 1.0
- * @date    2025-02-05
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    Generate Automatically.
  */
 
@@ -47,54 +46,54 @@ extern "C" {
 
 #if (LPUART1_TX_ID == 0)
 #elif (LPUART1_TX_ID == 1)
-#  define LPUART1_TX_AF GPIO_AF12_LPUART1
+#  define LPUART1_TX_GPIO_AF GPIO_AF12_LPUART1
 #elif (LPUART1_TX_ID == 2)
-#  define LPUART1_TX_AF GPIO_AF8_LPUART1
+#  define LPUART1_TX_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_TX_ID == 3)
-#  define LPUART1_TX_AF GPIO_AF8_LPUART1
+#  define LPUART1_TX_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_TX_ID == 4)
-#  define LPUART1_TX_AF GPIO_AF8_LPUART1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG7 can not be configured as LPUART1 TX on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define LPUART1_TX_GPIO_AF GPIO_AF8_LPUART1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG7 can not be configured as LPUART1 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* LPUART1_TX_ID */
 
 #if (LPUART1_RX_ID == 0)
 #elif (LPUART1_RX_ID == 1)
-#  define LPUART1_RX_AF GPIO_AF12_LPUART1
+#  define LPUART1_RX_GPIO_AF GPIO_AF12_LPUART1
 #elif (LPUART1_RX_ID == 2)
-#  define LPUART1_RX_AF GPIO_AF8_LPUART1
+#  define LPUART1_RX_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_RX_ID == 3)
-#  define LPUART1_RX_AF GPIO_AF8_LPUART1
+#  define LPUART1_RX_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_RX_ID == 4)
-#  define LPUART1_RX_AF GPIO_AF8_LPUART1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG8 can not be configured as LPUART1 RX on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define LPUART1_RX_GPIO_AF GPIO_AF8_LPUART1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG8 can not be configured as LPUART1 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* LPUART1_RX_ID */
 
 #if (LPUART1_CTS_ID == 0)
 #elif (LPUART1_CTS_ID == 1)
-#  define LPUART1_CTS_AF GPIO_AF12_LPUART1
+#  define LPUART1_CTS_GPIO_AF GPIO_AF12_LPUART1
 #elif (LPUART1_CTS_ID == 2)
-#  define LPUART1_CTS_AF GPIO_AF8_LPUART1
+#  define LPUART1_CTS_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_CTS_ID == 3)
-#  define LPUART1_CTS_AF GPIO_AF8_LPUART1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG5 can not be configured as LPUART1 CTS on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define LPUART1_CTS_GPIO_AF GPIO_AF8_LPUART1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG5 can not be configured as LPUART1 CTS on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* LPUART1_CTS_ID */
 
 #if (LPUART1_RTS_ID == 0)
 #elif (LPUART1_RTS_ID == 1)
-#  define LPUART1_RTS_AF GPIO_AF12_LPUART1
+#  define LPUART1_RTS_GPIO_AF GPIO_AF12_LPUART1
 #elif (LPUART1_RTS_ID == 2)
-#  define LPUART1_RTS_AF GPIO_AF8_LPUART1
+#  define LPUART1_RTS_GPIO_AF GPIO_AF8_LPUART1
 #elif (LPUART1_RTS_ID == 3)
-#  define LPUART1_RTS_AF GPIO_AF8_LPUART1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG6 can not be configured as LPUART1 RTS on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define LPUART1_RTS_GPIO_AF GPIO_AF8_LPUART1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG6 can not be configured as LPUART1 RTS on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* LPUART1_RTS_ID */
 
 extern UART_HandleTypeDef lpuart1_handle;
@@ -131,35 +130,35 @@ uint8_t lpuart1_deinit(void);
 
 #if (USART1_TX_ID == 0)
 #elif (USART1_TX_ID == 1)
-#  define USART1_TX_AF GPIO_AF7_USART1
+#  define USART1_TX_GPIO_AF GPIO_AF7_USART1
 #elif (USART1_TX_ID == 2)
-#  define USART1_TX_AF GPIO_AF7_USART1
+#  define USART1_TX_GPIO_AF GPIO_AF7_USART1
 #elif (USART1_TX_ID == 3)
-#  define USART1_TX_AF GPIO_AF7_USART1
+#  define USART1_TX_GPIO_AF GPIO_AF7_USART1
 #  if (defined(STM32GBK1CB))
 #    error "PC4 can not be configured as USART1 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART1_TX_ID == 4)
-#  define USART1_TX_AF GPIO_AF7_USART1
+#  define USART1_TX_GPIO_AF GPIO_AF7_USART1
 #  if (defined(STM32GBK1CB))
 #    error "PE0 can not be configured as USART1 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART1_TX_ID == 5)
-#  define USART1_TX_AF GPIO_AF7_USART1
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PG9 can not be configured as USART1 TX on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define USART1_TX_GPIO_AF GPIO_AF7_USART1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PG9 can not be configured as USART1 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* USART1_TX_ID */
 
 #if (USART1_RX_ID == 0)
 #elif (USART1_RX_ID == 1)
-#  define USART1_RX_AF GPIO_AF7_USART1
+#  define USART1_RX_GPIO_AF GPIO_AF7_USART1
 #elif (USART1_RX_ID == 2)
-#  define USART1_RX_AF GPIO_AF7_USART1
+#  define USART1_RX_GPIO_AF GPIO_AF7_USART1
 #elif (USART1_RX_ID == 3)
-#  define USART1_RX_AF GPIO_AF7_USART1
+#  define USART1_RX_GPIO_AF GPIO_AF7_USART1
 #elif (USART1_RX_ID == 4)
-#  define USART1_RX_AF GPIO_AF7_USART1
+#  define USART1_RX_GPIO_AF GPIO_AF7_USART1
 #  if (defined(STM32GBK1CB))
 #    error "PE1 can not be configured as USART1 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -167,12 +166,12 @@ uint8_t lpuart1_deinit(void);
 
 #if (USART1_CTS_ID == 0)
 #elif (USART1_CTS_ID == 1)
-#  define USART1_CTS_AF GPIO_AF7_USART1
+#  define USART1_CTS_GPIO_AF GPIO_AF7_USART1
 #endif  /* USART1_CTS_ID */
 
 #if (USART1_RTS_ID == 0)
 #elif (USART1_RTS_ID == 1)
-#  define USART1_RTS_AF GPIO_AF7_USART1
+#  define USART1_RTS_GPIO_AF GPIO_AF7_USART1
 #endif  /* USART1_RTS_ID */
 
 extern UART_HandleTypeDef usart1_handle;
@@ -209,13 +208,13 @@ uint8_t usart1_deinit(void);
 
 #if (USART2_TX_ID == 0)
 #elif (USART2_TX_ID == 1)
-#  define USART2_TX_AF GPIO_AF7_USART2
+#  define USART2_TX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_TX_ID == 2)
-#  define USART2_TX_AF GPIO_AF7_USART2
+#  define USART2_TX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_TX_ID == 3)
-#  define USART2_TX_AF GPIO_AF7_USART2
+#  define USART2_TX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_TX_ID == 4)
-#  define USART2_TX_AF GPIO_AF7_USART2
+#  define USART2_TX_GPIO_AF GPIO_AF7_USART2
 #  if (defined(STM32GBK1CB))
 #    error "PD5 can not be configured as USART2 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -223,13 +222,13 @@ uint8_t usart1_deinit(void);
 
 #if (USART2_RX_ID == 0)
 #elif (USART2_RX_ID == 1)
-#  define USART2_RX_AF GPIO_AF7_USART2
+#  define USART2_RX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_RX_ID == 2)
-#  define USART2_RX_AF GPIO_AF7_USART2
+#  define USART2_RX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_RX_ID == 3)
-#  define USART2_RX_AF GPIO_AF7_USART2
+#  define USART2_RX_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_RX_ID == 4)
-#  define USART2_RX_AF GPIO_AF7_USART2
+#  define USART2_RX_GPIO_AF GPIO_AF7_USART2
 #  if (defined(STM32GBK1CB))
 #    error "PD6 can not be configured as USART2 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -237,9 +236,9 @@ uint8_t usart1_deinit(void);
 
 #if (USART2_CTS_ID == 0)
 #elif (USART2_CTS_ID == 1)
-#  define USART2_CTS_AF GPIO_AF7_USART2
+#  define USART2_CTS_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_CTS_ID == 2)
-#  define USART2_CTS_AF GPIO_AF7_USART2
+#  define USART2_CTS_GPIO_AF GPIO_AF7_USART2
 #  if (defined(STM32GBK1CB))
 #    error "PD3 can not be configured as USART2 CTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -247,9 +246,9 @@ uint8_t usart1_deinit(void);
 
 #if (USART2_RTS_ID == 0)
 #elif (USART2_RTS_ID == 1)
-#  define USART2_RTS_AF GPIO_AF7_USART2
+#  define USART2_RTS_GPIO_AF GPIO_AF7_USART2
 #elif (USART2_RTS_ID == 2)
-#  define USART2_RTS_AF GPIO_AF7_USART2
+#  define USART2_RTS_GPIO_AF GPIO_AF7_USART2
 #  if (defined(STM32GBK1CB))
 #    error "PD4 can not be configured as USART2 RTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -289,16 +288,16 @@ uint8_t usart2_deinit(void);
 
 #if (USART3_TX_ID == 0)
 #elif (USART3_TX_ID == 1)
-#  define USART3_TX_AF GPIO_AF7_USART3
+#  define USART3_TX_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_TX_ID == 2)
-#  define USART3_TX_AF GPIO_AF7_USART3
+#  define USART3_TX_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_TX_ID == 3)
-#  define USART3_TX_AF GPIO_AF7_USART3
+#  define USART3_TX_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PC10 can not be configured as USART3 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART3_TX_ID == 4)
-#  define USART3_TX_AF GPIO_AF7_USART3
+#  define USART3_TX_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PD8 can not be configured as USART3 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -306,21 +305,21 @@ uint8_t usart2_deinit(void);
 
 #if (USART3_RX_ID == 0)
 #elif (USART3_RX_ID == 1)
-#  define USART3_RX_AF GPIO_AF7_USART3
+#  define USART3_RX_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_RX_ID == 2)
-#  define USART3_RX_AF GPIO_AF7_USART3
+#  define USART3_RX_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_RX_ID == 3)
-#  define USART3_RX_AF GPIO_AF7_USART3
+#  define USART3_RX_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PC11 can not be configured as USART3 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART3_RX_ID == 4)
-#  define USART3_RX_AF GPIO_AF7_USART3
+#  define USART3_RX_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PD9 can not be configured as USART3 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART3_RX_ID == 5)
-#  define USART3_RX_AF GPIO_AF7_USART3
+#  define USART3_RX_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PE15 can not be configured as USART3 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -328,11 +327,11 @@ uint8_t usart2_deinit(void);
 
 #if (USART3_CTS_ID == 0)
 #elif (USART3_CTS_ID == 1)
-#  define USART3_CTS_AF GPIO_AF7_USART3
+#  define USART3_CTS_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_CTS_ID == 2)
-#  define USART3_CTS_AF GPIO_AF7_USART3
+#  define USART3_CTS_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_CTS_ID == 3)
-#  define USART3_CTS_AF GPIO_AF7_USART3
+#  define USART3_CTS_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PD11 can not be configured as USART3 CTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -340,17 +339,17 @@ uint8_t usart2_deinit(void);
 
 #if (USART3_RTS_ID == 0)
 #elif (USART3_RTS_ID == 1)
-#  define USART3_RTS_AF GPIO_AF7_USART3
+#  define USART3_RTS_GPIO_AF GPIO_AF7_USART3
 #elif (USART3_RTS_ID == 2)
-#  define USART3_RTS_AF GPIO_AF7_USART3
+#  define USART3_RTS_GPIO_AF GPIO_AF7_USART3
 #  if (defined(STM32GBK1CB))
 #    error "PD12 can not be configured as USART3 RTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
 #elif (USART3_RTS_ID == 3)
-#  define USART3_RTS_AF GPIO_AF7_USART3
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB))
-#    error "PF6 can not be configured as USART3 RTS on STM32G431xx, STM32G441xx, STM32G491xx, STM32G4A1xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB)) */
+#  define USART3_RTS_GPIO_AF GPIO_AF7_USART3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PF6 can not be configured as USART3 RTS on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* USART3_RTS_ID */
 
 extern UART_HandleTypeDef usart3_handle;
@@ -387,7 +386,7 @@ uint8_t usart3_deinit(void);
 
 #if (UART4_TX_ID == 0)
 #elif (UART4_TX_ID == 1)
-#  define UART4_TX_AF GPIO_AF5_UART4
+#  define UART4_TX_GPIO_AF GPIO_AF5_UART4
 #  if (defined(STM32GBK1CB))
 #    error "PC10 can not be configured as UART4 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -395,7 +394,7 @@ uint8_t usart3_deinit(void);
 
 #if (UART4_RX_ID == 0)
 #elif (UART4_RX_ID == 1)
-#  define UART4_RX_AF GPIO_AF5_UART4
+#  define UART4_RX_GPIO_AF GPIO_AF5_UART4
 #  if (defined(STM32GBK1CB))
 #    error "PC11 can not be configured as UART4 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -403,7 +402,7 @@ uint8_t usart3_deinit(void);
 
 #if (UART4_CTS_ID == 0)
 #elif (UART4_CTS_ID == 1)
-#  define UART4_CTS_AF GPIO_AF14_UART4
+#  define UART4_CTS_GPIO_AF GPIO_AF14_UART4
 #  if (defined(STM32GBK1CB))
 #    error "PB7 can not be configured as UART4 CTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -411,7 +410,7 @@ uint8_t usart3_deinit(void);
 
 #if (UART4_RTS_ID == 0)
 #elif (UART4_RTS_ID == 1)
-#  define UART4_RTS_AF GPIO_AF8_UART4
+#  define UART4_RTS_GPIO_AF GPIO_AF8_UART4
 #  if (defined(STM32GBK1CB))
 #    error "PA15 can not be configured as UART4 RTS on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
@@ -451,34 +450,34 @@ uint8_t uart4_deinit(void);
 
 #if (UART5_TX_ID == 0)
 #elif (UART5_TX_ID == 1)
-#  define UART5_TX_AF GPIO_AF5_UART5
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB))
-#    error "PC12 can not be configured as UART5 TX on STM32G431xx, STM32G441xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB)) */
+#  define UART5_TX_GPIO_AF GPIO_AF5_UART5
+#  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PC12 can not be configured as UART5 TX on STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* UART5_TX_ID */
 
 #if (UART5_RX_ID == 0)
 #elif (UART5_RX_ID == 1)
-#  define UART5_RX_AF GPIO_AF5_UART5
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB))
-#    error "PD2 can not be configured as UART5 RX on STM32G431xx, STM32G441xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB)) */
+#  define UART5_RX_GPIO_AF GPIO_AF5_UART5
+#  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PD2 can not be configured as UART5 RX on STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* UART5_RX_ID */
 
 #if (UART5_CTS_ID == 0)
 #elif (UART5_CTS_ID == 1)
-#  define UART5_CTS_AF GPIO_AF14_UART5
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB))
-#    error "PB5 can not be configured as UART5 CTS on STM32G431xx, STM32G441xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB)) */
+#  define UART5_CTS_GPIO_AF GPIO_AF14_UART5
+#  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PB5 can not be configured as UART5 CTS on STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* UART5_CTS_ID */
 
 #if (UART5_RTS_ID == 0)
 #elif (UART5_RTS_ID == 1)
-#  define UART5_RTS_AF GPIO_AF8_UART5
-#  if (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB))
-#    error "PB4 can not be configured as UART5 RTS on STM32G431xx, STM32G441xx, STM32GBK1CB! "
-#  endif  /* (defined(STM32G431xx) || defined(STM32G441xx) || defined(STM32GBK1CB)) */
+#  define UART5_RTS_GPIO_AF GPIO_AF8_UART5
+#  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PB4 can not be configured as UART5 RTS on STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* UART5_RTS_ID */
 
 extern UART_HandleTypeDef uart5_handle;

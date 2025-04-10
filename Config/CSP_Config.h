@@ -1,10 +1,9 @@
-
 /**
  * @file    CSP_Config.h
  * @author  Deadline039
  * @brief   The CSP configuration of STM32G4xx.
- * @version 1.0
- * @date    2025-02-05
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    Generate Automatically.
  */
 
@@ -143,9 +142,13 @@
 //     <i>  Selects DMA Channel
 #define LPUART1_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define LPUART1_RX_DMA_PRIORITY    1
+//     <o LPUART1_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define LPUART1_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -180,9 +183,13 @@
 //     <i>  Selects DMA Channel
 #define LPUART1_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define LPUART1_TX_DMA_PRIORITY    1
+//     <o LPUART1_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define LPUART1_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -192,7 +199,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define LPUART1_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define LPUART1_TX_DMA_BUF_SIZE    256
 
@@ -205,7 +212,7 @@
 
 // <e> USART1 (Universal asynchronous receiver transmitter)
 
-#define USART1_ENABLE 1
+#define USART1_ENABLE 1 
 
 #if USART1_ENABLE
 
@@ -294,7 +301,7 @@
 #endif  /* USART1_RTS_ID */
 
 //   <e> Enable USART1 Interrupt
-#define USART1_IT_ENABLE 0
+#define USART1_IT_ENABLE 1
 
 #if USART1_IT_ENABLE
 
@@ -321,9 +328,13 @@
 //     <i>  Selects DMA Channel
 #define USART1_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART1_RX_DMA_PRIORITY    1
+//     <o USART1_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART1_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -358,9 +369,13 @@
 //     <i>  Selects DMA Channel
 #define USART1_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART1_TX_DMA_PRIORITY    1
+//     <o USART1_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART1_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -370,7 +385,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define USART1_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define USART1_TX_DMA_BUF_SIZE    256
 
@@ -503,9 +518,13 @@
 //     <i>  Selects DMA Channel
 #define USART2_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART2_RX_DMA_PRIORITY    1
+//     <o USART2_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART2_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -540,9 +559,13 @@
 //     <i>  Selects DMA Channel
 #define USART2_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART2_TX_DMA_PRIORITY    1
+//     <o USART2_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART2_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -552,7 +575,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define USART2_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define USART2_TX_DMA_BUF_SIZE    256
 
@@ -697,9 +720,13 @@
 //     <i>  Selects DMA Channel
 #define USART3_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART3_RX_DMA_PRIORITY    1
+//     <o USART3_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART3_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -734,9 +761,13 @@
 //     <i>  Selects DMA Channel
 #define USART3_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define USART3_TX_DMA_PRIORITY    1
+//     <o USART3_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define USART3_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -746,7 +777,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define USART3_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define USART3_TX_DMA_BUF_SIZE    256
 
@@ -847,9 +878,13 @@
 //     <i>  Selects DMA Channel
 #define UART4_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define UART4_RX_DMA_PRIORITY    1
+//     <o UART4_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define UART4_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -884,9 +919,13 @@
 //     <i>  Selects DMA Channel
 #define UART4_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define UART4_TX_DMA_PRIORITY    1
+//     <o UART4_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define UART4_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -896,7 +935,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define UART4_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define UART4_TX_DMA_BUF_SIZE    256
 
@@ -997,9 +1036,13 @@
 //     <i>  Selects DMA Channel
 #define UART5_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define UART5_RX_DMA_PRIORITY    1
+//     <o UART5_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define UART5_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1034,9 +1077,13 @@
 //     <i>  Selects DMA Channel
 #define UART5_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define UART5_TX_DMA_PRIORITY    1
+//     <o UART5_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define UART5_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1046,7 +1093,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define UART5_TX_DMA_IT_SUB      2
 
-//     <o> The size of Receive buf [byte]
+//     <o> The size of transmit buf [byte]
 //     <i>  Write data to Send buf, and sending with thread safety
 #define UART5_TX_DMA_BUF_SIZE    256
 
@@ -1426,9 +1473,13 @@
 //     <i>  Selects DMA Channel
 #define QUADSPI1_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define QUADSPI1_DMA_PRIORITY    1
+//     <o QUADSPI1_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define QUADSPI1_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA  Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1438,7 +1489,7 @@
 //     <i>  The Interrupt SubPriority of DMA Rx
 #define QUADSPI1_DMA_IT_SUB      2
 
-//  <o> Direction
+//  <o QUADSPI1_DMA_DIRECTION> Direction
 //   <DMA_MEMORY_TO_PERIPH=> Transmit
 //   <DMA_PERIPH_TO_MEMORY=> Receive
 #define QUADSPI1_DMA_DIRECTION DMA_MEMORY_TO_PERIPH
@@ -1566,9 +1617,13 @@
 //     <i>  Selects DMA Channel
 #define SPI1_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI1_TX_DMA_PRIORITY    1
+//     <o SPI1_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI1_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1595,9 +1650,13 @@
 //     <i>  Selects DMA Channel
 #define SPI1_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI1_RX_DMA_PRIORITY    1
+//     <o SPI1_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI1_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1725,9 +1784,13 @@
 //     <i>  Selects DMA Channel
 #define SPI2_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI2_TX_DMA_PRIORITY    1
+//     <o SPI2_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI2_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1754,9 +1817,13 @@
 //     <i>  Selects DMA Channel
 #define SPI2_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI2_RX_DMA_PRIORITY    1
+//     <o SPI2_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI2_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1877,9 +1944,13 @@
 //     <i>  Selects DMA Channel
 #define SPI3_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI3_TX_DMA_PRIORITY    1
+//     <o SPI3_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI3_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -1906,9 +1977,13 @@
 //     <i>  Selects DMA Channel
 #define SPI3_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI3_RX_DMA_PRIORITY    1
+//     <o SPI3_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI3_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2030,9 +2105,13 @@
 //     <i>  Selects DMA Channel
 #define SPI4_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI4_TX_DMA_PRIORITY    1
+//     <o SPI4_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI4_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2059,9 +2138,13 @@
 //     <i>  Selects DMA Channel
 #define SPI4_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define SPI4_RX_DMA_PRIORITY    1
+//     <o SPI4_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define SPI4_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2148,9 +2231,13 @@
 //     <i>  Selects DMA Channel
 #define I2C1_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C1_TX_DMA_PRIORITY    1
+//     <o I2C1_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C1_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2177,9 +2264,13 @@
 //     <i>  Selects DMA Channel
 #define I2C1_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C1_RX_DMA_PRIORITY    1
+//     <o I2C1_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C1_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2263,9 +2354,13 @@
 //     <i>  Selects DMA Channel
 #define I2C2_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C2_TX_DMA_PRIORITY    1
+//     <o I2C2_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C2_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2292,9 +2387,13 @@
 //     <i>  Selects DMA Channel
 #define I2C2_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C2_RX_DMA_PRIORITY    1
+//     <o I2C2_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C2_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2390,9 +2489,13 @@
 //     <i>  Selects DMA Channel
 #define I2C3_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C3_TX_DMA_PRIORITY    1
+//     <o I2C3_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C3_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2419,9 +2522,13 @@
 //     <i>  Selects DMA Channel
 #define I2C3_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C3_RX_DMA_PRIORITY    1
+//     <o I2C3_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C3_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2514,9 +2621,13 @@
 //     <i>  Selects DMA Channel
 #define I2C4_TX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C4_TX_DMA_PRIORITY    1
+//     <o I2C4_TX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C4_TX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA TX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2543,9 +2654,13 @@
 //     <i>  Selects DMA Channel
 #define I2C4_RX_DMA_CHANNEL     1
 
-//     <o> Priority <0=>Low <1=>Medium <2=>High <3=>Very High
-//     <i>  Selects DMA Priority
-#define I2C4_RX_DMA_PRIORITY    1
+//     <o I2C4_RX_DMA_PRIORITY> Priority
+//      <DMA_PRIORITY_LOW=>Low
+//      <DMA_PRIORITY_MEDIUM=>Medium
+//      <DMA_PRIORITY_HIGH=>High
+//      <DMA_PRIORITY_VERY_HIGH=>Very High
+//     <i> Selects DMA Priority
+#define I2C4_RX_DMA_PRIORITY    DMA_PRIORITY_LOW
 
 //     <o> DMA RX Interrupt Priority <0-15>
 //     <i>  The Interrupt Priority of DMA Rx
@@ -2562,7 +2677,7 @@
 #endif  /* I2C4_ENABLE */
 // </e>
 
-// <e> FDCAN1 (Controller Area Network)
+// <e> FDCAN1 (Flexible Data-Rate Controller Area Network)
 #define FDCAN1_ENABLE  0
 
 #if FDCAN1_ENABLE
@@ -2634,7 +2749,7 @@
 #endif  /* FDCAN1_ENABLE */
 // </e>
 
-// <e> FDCAN2 (Controller Area Network)
+// <e> FDCAN2 (Flexible Data-Rate Controller Area Network)
 #define FDCAN2_ENABLE  0
 
 #if FDCAN2_ENABLE
@@ -2700,7 +2815,7 @@
 #endif  /* FDCAN2_ENABLE */
 // </e>
 
-// <e> FDCAN3 (Controller Area Network)
+// <e> FDCAN3 (Flexible Data-Rate Controller Area Network)
 #define FDCAN3_ENABLE  0
 
 #if FDCAN3_ENABLE
@@ -2766,6 +2881,7 @@
 #endif  /* FDCAN3_ENABLE */
 // </e>
 
+
 // <e> RTC (Real Time Clock)
 #define RTC_ENABLE            0
 
@@ -2812,9 +2928,6 @@ extern "C" {
 #define _CSP_DMA_CHANNEL_IRQ(x, y) DMA##x##_Channel##y##_IRQHandler
 #define CSP_DMA_CHANNEL_IRQ(x, y)  _CSP_DMA_CHANNEL_IRQ(x, y)
 
-/* Set DMA Priority */
-#define CSP_DMA_PRIORITY(x)        ((x) << DMA_CCR_PL_Pos)
-
 /* Enable the clock of DMA. */
 #define _CSP_DMA_CLK_ENABLE(x)     do {__HAL_RCC_DMAMUX1_CLK_ENABLE(); __HAL_RCC_DMA##x##_CLK_ENABLE();} while(0)
 #define CSP_DMA_CLK_ENABLE(x)      _CSP_DMA_CLK_ENABLE(x)
@@ -2837,13 +2950,9 @@ extern "C" {
 #include "../I2C_STM32G4xx.h"
 #endif  /* (I2C1_ENABLE || I2C2_ENABLE || I2C3_ENABLE || I2C4_ENABLE) */
     
-#if (QUADSPI1_ENABLE)
-#include "../QSPI_STM32G4xx.h"
-#endif  /* (QUADSPI1_ENABLE) */
-
-#if (SPI1_ENABLE || SPI2_ENABLE || SPI3_ENABLE || SPI4_ENABLE)
+#if (SPI1_ENABLE || SPI2_ENABLE || SPI3_ENABLE || SPI4_ENABLE || QUADSPI1_ENABLE)
 #include "../SPI_STM32G4xx.h"
-#endif  /* (SPI1_ENABLE || SPI2_ENABLE || SPI3_ENABLE || SPI4_ENABLE) */
+#endif  /* (SPI1_ENABLE || SPI2_ENABLE || SPI3_ENABLE || SPI4_ENABLE || QUADSPI1_ENABLE) */
 
 #if (FDCAN1_ENABLE || FDCAN2_ENABLE || FDCAN3_ENABLE)
 #include "../CAN_STM32G4xx.h"

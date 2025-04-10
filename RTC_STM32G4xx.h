@@ -2,15 +2,15 @@
  * @file    RTC_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of RTC on STM32G4xx
- * @version 1.0
- * @date    2024-08-31
+ * @version 3.3.0
+ * @date    2025-04-10
  * @note    We used C time library to process the time. The hardware
  *          configuration reference the ST: AN3371.
  *          You should attention the time zone if you want to set time by NTP.
  */
 
-#ifndef __RTC_STM32G4XX_H
-#define __RTC_STM32G4XX_H
+#ifndef __RTC_STM32G4xx_H
+#define __RTC_STM32G4xx_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,4 +51,4 @@ void rtc_set_time(struct tm *_tm);
 }
 #endif /* __cplusplus */
 
-#endif /* __RTC_STM32G4XX_H */
+#endif /* __RTC_STM32G4xx_H */
