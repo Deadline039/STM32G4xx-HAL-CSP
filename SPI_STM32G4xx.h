@@ -2,8 +2,8 @@
  * @file    SPI_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of SPI and QSPI on STM32G4xx
- * @version 3.3.0
- * @date    2025-04-10
+ * @version 3.3.1
+ * @date    2025-04-25
  * @note    Generate Automatically.
  */
 

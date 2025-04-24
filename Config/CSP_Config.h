@@ -2,8 +2,8 @@
  * @file    CSP_Config.h
  * @author  Deadline039
  * @brief   The CSP configuration of STM32G4xx.
- * @version 3.3.0
- * @date    2025-04-10
+ * @version 3.3.1
+ * @date    2025-04-25
  * @note    Generate Automatically.
  */
 
@@ -212,13 +212,13 @@
 
 // <e> USART1 (Universal asynchronous receiver transmitter)
 
-#define USART1_ENABLE 1 
+#define USART1_ENABLE 0 
 
 #if USART1_ENABLE
 
 //   <o> USART1_TX Pin
 //       <0=>Not Used <1=>PA9 <2=>PB6 <3=>PC4 <4=>PE0 <5=>PG9 
-#define USART1_TX_ID 1
+#define USART1_TX_ID 0
 
 #if (USART1_TX_ID == 0)
 #define USART1_TX 0
@@ -248,7 +248,7 @@
 
 //   <o> USART1_RX Pin
 //       <0=>Not Used <1=>PA10 <2=>PB7 <3=>PC5 <4=>PE1 
-#define USART1_RX_ID 1
+#define USART1_RX_ID 0
 
 #if (USART1_RX_ID == 0)
 #define USART1_RX 0
@@ -301,7 +301,7 @@
 #endif  /* USART1_RTS_ID */
 
 //   <e> Enable USART1 Interrupt
-#define USART1_IT_ENABLE 1
+#define USART1_IT_ENABLE 0
 
 #if USART1_IT_ENABLE
 
