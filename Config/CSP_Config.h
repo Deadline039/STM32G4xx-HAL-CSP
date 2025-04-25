@@ -212,13 +212,13 @@
 
 // <e> USART1 (Universal asynchronous receiver transmitter)
 
-#define USART1_ENABLE 0 
+#define USART1_ENABLE 1
 
 #if USART1_ENABLE
 
 //   <o> USART1_TX Pin
 //       <0=>Not Used <1=>PA9 <2=>PB6 <3=>PC4 <4=>PE0 <5=>PG9 
-#define USART1_TX_ID 0
+#define USART1_TX_ID 1
 
 #if (USART1_TX_ID == 0)
 #define USART1_TX 0
@@ -248,7 +248,7 @@
 
 //   <o> USART1_RX Pin
 //       <0=>Not Used <1=>PA10 <2=>PB7 <3=>PC5 <4=>PE1 
-#define USART1_RX_ID 0
+#define USART1_RX_ID 1
 
 #if (USART1_RX_ID == 0)
 #define USART1_RX 0
