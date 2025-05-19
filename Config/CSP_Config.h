@@ -2,8 +2,8 @@
  * @file    CSP_Config.h
  * @author  Deadline039
  * @brief   The CSP configuration of STM32G4xx.
- * @version 3.3.1
- * @date    2025-04-25
+ * @version 3.3.2
+ * @date    2025-05-19
  * @note    Generate Automatically.
  */
 
@@ -2683,7 +2683,7 @@
 #if FDCAN1_ENABLE
 
 //   <o> FDCAN1_RX Pin
-//       <0=>PA11<1=>PB8<2=>PD0
+//       <0=>PA11<1=>PB8<2=>PD0<3=>PA9<4=>PD4<5=>PE0
 #define FDCAN1_RX_ID 0
 
 #if (FDCAN1_RX_ID == 0)
@@ -2695,12 +2695,21 @@
 #elif (FDCAN1_RX_ID == 2)
 #define FDCAN1_RX_PORT D
 #define FDCAN1_RX_PIN GPIO_PIN_0
+#elif (FDCAN1_RX_ID == 3)
+#define FDCAN1_RX_PORT A
+#define FDCAN1_RX_PIN GPIO_PIN_9
+#elif (FDCAN1_RX_ID == 4)
+#define FDCAN1_RX_PORT D
+#define FDCAN1_RX_PIN GPIO_PIN_4
+#elif (FDCAN1_RX_ID == 5)
+#define FDCAN1_RX_PORT E
+#define FDCAN1_RX_PIN GPIO_PIN_0
 #else   /* FDCAN1_RX_ID */
 #error "Invalid FDCAN1_RX Pin Configuration! "
 #endif  /* FDCAN1_RX_ID */
 
 //   <o> FDCAN1_TX Pin
-//       <0=>PA12<1=>PB9<2=>PD1
+//       <0=>PA12<1=>PB9<2=>PD1<3=>PA10<4=>PD5<5=>PE1
 #define FDCAN1_TX_ID 0
 
 #if (FDCAN1_TX_ID == 0)
@@ -2711,6 +2720,15 @@
 #define FDCAN1_TX_PIN GPIO_PIN_9
 #elif (FDCAN1_TX_ID == 2)
 #define FDCAN1_TX_PORT D
+#define FDCAN1_TX_PIN GPIO_PIN_1
+#elif (FDCAN1_TX_ID == 3)
+#define FDCAN1_TX_PORT A
+#define FDCAN1_TX_PIN GPIO_PIN_10
+#elif (FDCAN1_TX_ID == 4)
+#define FDCAN1_TX_PORT D
+#define FDCAN1_TX_PIN GPIO_PIN_5
+#elif (FDCAN1_TX_ID == 5)
+#define FDCAN1_TX_PORT E
 #define FDCAN1_TX_PIN GPIO_PIN_1
 #else   /* FDCAN1_TX_ID */
 #error "Invalid FDCAN1_TX Pin Configuration! "
@@ -2755,7 +2773,7 @@
 #if FDCAN2_ENABLE
 
 //   <o> FDCAN2_RX Pin
-//       <0=>PB5<1=>PB12
+//       <0=>PB5<1=>PB12<2=>PD6<3=>PD9
 #define FDCAN2_RX_ID 0
 
 #if (FDCAN2_RX_ID == 0)
@@ -2764,12 +2782,18 @@
 #elif (FDCAN2_RX_ID == 1)
 #define FDCAN2_RX_PORT B
 #define FDCAN2_RX_PIN GPIO_PIN_12
+#elif (FDCAN2_RX_ID == 2)
+#define FDCAN2_RX_PORT D
+#define FDCAN2_RX_PIN GPIO_PIN_6
+#elif (FDCAN2_RX_ID == 3)
+#define FDCAN2_RX_PORT D
+#define FDCAN2_RX_PIN GPIO_PIN_9
 #else   /* FDCAN2_RX_ID */
 #error "Invalid FDCAN2_RX Pin Configuration! "
 #endif  /* FDCAN2_RX_ID */
 
 //   <o> FDCAN2_TX Pin
-//       <0=>PB6<1=>PB13
+//       <0=>PB6<1=>PB13<2=>PB7<3=>PD10
 #define FDCAN2_TX_ID 0
 
 #if (FDCAN2_TX_ID == 0)
@@ -2778,6 +2802,12 @@
 #elif (FDCAN2_TX_ID == 1)
 #define FDCAN2_TX_PORT B
 #define FDCAN2_TX_PIN GPIO_PIN_13
+#elif (FDCAN2_TX_ID == 2)
+#define FDCAN2_TX_PORT B
+#define FDCAN2_TX_PIN GPIO_PIN_7
+#elif (FDCAN2_TX_ID == 3)
+#define FDCAN2_TX_PORT D
+#define FDCAN2_TX_PIN GPIO_PIN_10
 #else   /* FDCAN2_TX_ID */
 #error "Invalid FDCAN2_TX Pin Configuration! "
 #endif  /* FDCAN2_TX_ID */
@@ -2821,7 +2851,7 @@
 #if FDCAN3_ENABLE
 
 //   <o> FDCAN3_RX Pin
-//       <0=>PA8<1=>PB3
+//       <0=>PA8<1=>PB3<2=>PB11
 #define FDCAN3_RX_ID 0
 
 #if (FDCAN3_RX_ID == 0)
@@ -2830,20 +2860,29 @@
 #elif (FDCAN3_RX_ID == 1)
 #define FDCAN3_RX_PORT B
 #define FDCAN3_RX_PIN GPIO_PIN_3
+#elif (FDCAN3_RX_ID == 2)
+#define FDCAN3_RX_PORT B
+#define FDCAN3_RX_PIN GPIO_PIN_11
 #else   /* FDCAN3_RX_ID */
 #error "Invalid FDCAN3_RX Pin Configuration! "
 #endif  /* FDCAN3_RX_ID */
 
 //   <o> FDCAN3_TX Pin
-//       <0=>PA15<1=>PB4
+//       <0=>PA14<1=>PA15<2=>PB4<3=>PB10
 #define FDCAN3_TX_ID 0
 
 #if (FDCAN3_TX_ID == 0)
 #define FDCAN3_TX_PORT A
-#define FDCAN3_TX_PIN GPIO_PIN_15
+#define FDCAN3_TX_PIN GPIO_PIN_14
 #elif (FDCAN3_TX_ID == 1)
+#define FDCAN3_TX_PORT A
+#define FDCAN3_TX_PIN GPIO_PIN_15
+#elif (FDCAN3_TX_ID == 2)
 #define FDCAN3_TX_PORT B
 #define FDCAN3_TX_PIN GPIO_PIN_4
+#elif (FDCAN3_TX_ID == 3)
+#define FDCAN3_TX_PORT B
+#define FDCAN3_TX_PIN GPIO_PIN_10
 #else   /* FDCAN3_TX_ID */
 #error "Invalid FDCAN3_TX Pin Configuration! "
 #endif  /* FDCAN3_TX_ID */

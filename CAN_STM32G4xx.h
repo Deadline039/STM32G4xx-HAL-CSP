@@ -2,8 +2,8 @@
  * @file    CAN_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of CAN on STM32G4xx
- * @version 3.3.1
- * @date    2025-04-25
+ * @version 3.3.2
+ * @date    2025-05-19
  * @note    The calculation formula of CAN rate reference to NXP
  *          Application Note: CAN Bit Timing Requirements (AN1798)
  *          https://www.nxp.com/docs/en/application-note/AN1798.pdf
@@ -79,6 +79,21 @@ typedef enum {
 #  if (defined(STM32GBK1CB))
 #    error "PD1 can not be configured as FDCAN1 TX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
+#elif (FDCAN1_TX_ID == 3)
+#  define FDCAN1_TX_GPIO_AF GPIO_AF9_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PA10 can not be configured as FDCAN1 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN1_TX_ID == 4)
+#  define FDCAN1_TX_GPIO_AF GPIO_AF9_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PD5 can not be configured as FDCAN1 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN1_TX_ID == 5)
+#  define FDCAN1_TX_GPIO_AF GPIO_AF9_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PE1 can not be configured as FDCAN1 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN1_TX_ID */
 
 #if (FDCAN1_RX_ID == 0)
@@ -90,6 +105,21 @@ typedef enum {
 #  if (defined(STM32GBK1CB))
 #    error "PD0 can not be configured as FDCAN1 RX on STM32GBK1CB! "
 #  endif  /* (defined(STM32GBK1CB)) */
+#elif (FDCAN1_RX_ID == 3)
+#  define FDCAN1_RX_GPIO_AF GPIO_AF11_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PA9 can not be configured as FDCAN1 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN1_RX_ID == 4)
+#  define FDCAN1_RX_GPIO_AF GPIO_AF9_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PD4 can not be configured as FDCAN1 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN1_RX_ID == 5)
+#  define FDCAN1_RX_GPIO_AF GPIO_AF9_FDCAN1
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
+#    error "PE0 can not be configured as FDCAN1 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN1_RX_ID */
 
 extern FDCAN_HandleTypeDef fdcan1_handle;
@@ -128,6 +158,16 @@ uint8_t fdcan1_deinit(void);
 #  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
 #    error "PB13 can not be configured as FDCAN2 TX on STM32GBK1CB, STM32G431xx, STM32G441xx! "
 #  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
+#elif (FDCAN2_TX_ID == 2)
+#  define FDCAN2_TX_GPIO_AF GPIO_AF9_FDCAN2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PB7 can not be configured as FDCAN2 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN2_TX_ID == 3)
+#  define FDCAN2_TX_GPIO_AF GPIO_AF9_FDCAN2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PD10 can not be configured as FDCAN2 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN2_TX_ID */
 
 #if (FDCAN2_RX_ID == 0)
@@ -140,6 +180,16 @@ uint8_t fdcan1_deinit(void);
 #  if (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx))
 #    error "PB12 can not be configured as FDCAN2 RX on STM32GBK1CB, STM32G431xx, STM32G441xx! "
 #  endif  /* (defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G441xx)) */
+#elif (FDCAN2_RX_ID == 2)
+#  define FDCAN2_RX_GPIO_AF GPIO_AF9_FDCAN2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PD6 can not be configured as FDCAN2 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN2_RX_ID == 3)
+#  define FDCAN2_RX_GPIO_AF GPIO_AF9_FDCAN2
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PD9 can not be configured as FDCAN2 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN2_RX_ID */
 
 extern FDCAN_HandleTypeDef fdcan2_handle;
@@ -170,14 +220,24 @@ uint8_t fdcan2_deinit(void);
 
 #if (FDCAN3_TX_ID == 0)
 #  define FDCAN3_TX_GPIO_AF GPIO_AF11_FDCAN3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PA14 can not be configured as FDCAN3 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G471xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
+#elif (FDCAN3_TX_ID == 1)
+#  define FDCAN3_TX_GPIO_AF GPIO_AF11_FDCAN3
 #  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx))
 #    error "PA15 can not be configured as FDCAN3 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G471xx, STM32G441xx! "
 #  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx)) */
-#elif (FDCAN3_TX_ID == 1)
+#elif (FDCAN3_TX_ID == 2)
 #  define FDCAN3_TX_GPIO_AF GPIO_AF11_FDCAN3
 #  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx))
 #    error "PB4 can not be configured as FDCAN3 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G471xx, STM32G441xx! "
 #  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx)) */
+#elif (FDCAN3_TX_ID == 3)
+#  define FDCAN3_TX_GPIO_AF GPIO_AF11_FDCAN3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PB10 can not be configured as FDCAN3 TX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G471xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN3_TX_ID */
 
 #if (FDCAN3_RX_ID == 0)
@@ -190,6 +250,11 @@ uint8_t fdcan2_deinit(void);
 #  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx))
 #    error "PB3 can not be configured as FDCAN3 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G471xx, STM32G441xx! "
 #  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G471xx) || defined(STM32G441xx)) */
+#elif (FDCAN3_RX_ID == 2)
+#  define FDCAN3_RX_GPIO_AF GPIO_AF11_FDCAN3
+#  if (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx))
+#    error "PB11 can not be configured as FDCAN3 RX on STM32G491xx, STM32G4A1xx, STM32GBK1CB, STM32G431xx, STM32G474xx, STM32G471xx, STM32G484xx, STM32G441xx! "
+#  endif  /* (defined(STM32G491xx) || defined(STM32G4A1xx) || defined(STM32GBK1CB) || defined(STM32G431xx) || defined(STM32G474xx) || defined(STM32G471xx) || defined(STM32G484xx) || defined(STM32G441xx)) */
 #endif  /* FDCAN3_RX_ID */
 
 extern FDCAN_HandleTypeDef fdcan3_handle;

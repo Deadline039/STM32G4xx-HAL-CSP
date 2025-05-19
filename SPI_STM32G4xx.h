@@ -2,8 +2,8 @@
  * @file    SPI_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of SPI and QSPI on STM32G4xx
- * @version 3.3.1
- * @date    2025-04-25
+ * @version 3.3.2
+ * @date    2025-05-19
  * @note    Generate Automatically.
  */
 
@@ -694,7 +694,7 @@ uint8_t spi_change_speed(SPI_HandleTypeDef *hspi, uint8_t speed);
 
 extern QSPI_HandleTypeDef qspi1_handle;
 
-uint8_t quadspi1_init(uint32_t clock_mode, uint32_t flash_size);
+uint8_t qspi1_init(uint32_t clock_mode, uint32_t flash_size);
 
 #  if QUADSPI1_DMA
 #    define QUADSPI1_DMA_IRQn                                                  \
