@@ -2,7 +2,7 @@
  * @file    CAN_STM32G4xx.c
  * @author  Deadline039
  * @brief   Chip Support Package of FDCAN on STM32G4xx
- * @version 3.3.2
+ * @version 3.3.3
  * @date    2025-05-19
  * @note    We will support FDCAN in the feature.
  *          Generate Automatically. 

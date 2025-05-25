@@ -2,7 +2,7 @@
  * @file    UART_STM32G4xx.h
  * @author  Deadline039
  * @brief   Chip Support Package of UART on STM32G4xx
- * @version 3.3.2
+ * @version 3.3.3
  * @date    2025-05-19
  * @note    Generate Automatically.
  */

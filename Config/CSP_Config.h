@@ -2,7 +2,7 @@
  * @file    CSP_Config.h
  * @author  Deadline039
  * @brief   The CSP configuration of STM32G4xx.
- * @version 3.3.2
+ * @version 3.3.3
  * @date    2025-05-19
  * @note    Generate Automatically.
  */
